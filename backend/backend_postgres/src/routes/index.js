@@ -27,7 +27,7 @@ router.post('/pedidos/cabeceras',CreatePedidoCabecera);
 router.get('/pedidos/detalles/:ped_cab_id',getPedidoDetalleByIdCabecera);
 router.post('/pedidos/detalles',CreatePedidoDetalle)
 //Login
-//SubidaImagenes
+//SubidaImagenes url
 //JWT
 
 module.exports = router;
