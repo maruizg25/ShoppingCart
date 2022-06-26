@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const {getClientes,getClienteByCedula, getClienteById, CreateUsuario, CreateCliente, getUsuarioById
-    , ChangeStateUsuario, UpdateCliente, getProductos, getProductoByNombre, getProductoById, CreateProducto, UpdateProducto, DeleteProducto, getPedidosCabecera, getPedidosCabeceraById, getPedidosCabeceraByDate, CreatePedidoCabecera, getPedidoDetalleByIdCabecera, CreatePedidoDetalle} = require('../controllers/index')
+    , ChangeStateUsuario, UpdateCliente, getProductos, getProductoByNombre, getProductoById, CreateProducto, UpdateProducto, DeleteProducto, getPedidosCabecera, getPedidosCabeceraById, getPedidosCabeceraByDate, CreatePedidoCabecera, getPedidoDetalleByIdCabecera, CreatePedidoDetalle, Login} = require('../controllers/index')
 //Cliente
 router.get('/clientes',getClientes);
 router.get('/clientes/cedula/:per_cedula',getClienteByCedula);
@@ -27,6 +27,7 @@ router.post('/pedidos/cabeceras',CreatePedidoCabecera);
 router.get('/pedidos/detalles/:ped_cab_id',getPedidoDetalleByIdCabecera);
 router.post('/pedidos/detalles',CreatePedidoDetalle)
 //Login
+router.get('/login',Login)
 //SubidaImagenes url
 //JWT
 

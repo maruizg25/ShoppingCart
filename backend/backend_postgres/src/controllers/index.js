@@ -209,9 +209,18 @@ const CreatePedidoDetalle = async (req, res) => {
         }
     })
 }
-
-//crear subida de imagen
 // crear una ruta para el login
+const Login = async (req, res) => { 
+    const usr_usuario = req.params.usr_usuario;
+    const usr_clave = req.params.usr_clave;
+    const response = await pool.query('SELECT * FROM usuario where usr_usuario=$1 and usr_clave=$2 and usr_estado=true;',[usr_usuario,usr_clave])
+    res.json({
+        message: true
+    })
+
+}
+//crear subida de imagen
+
 
 module.exports ={
     getClientes,
@@ -233,7 +242,8 @@ module.exports ={
     getPedidosCabeceraByDate,
     CreatePedidoCabecera,
     getPedidoDetalleByIdCabecera,
-    CreatePedidoDetalle
+    CreatePedidoDetalle,
+    Login,
 
 
 }
