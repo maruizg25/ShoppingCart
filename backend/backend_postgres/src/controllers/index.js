@@ -211,16 +211,23 @@ const CreatePedidoDetalle = async (req, res) => {
 }
 // crear una ruta para el login
 const Login = async (req, res) => { 
-    const usr_usuario = req.params.usr_usuario;
-    const usr_clave = req.params.usr_clave;
-    const response = await pool.query('SELECT * FROM usuario where usr_usuario=$1 and usr_clave=$2 and usr_estado=true;',[usr_usuario,usr_clave])
-    res.json({
-        message: true
-    })
-
+    const {usr_usuario,usr_clave} = req.body;
+    const response = await pool.query(`select * from usuario where usr_usuario=$1 and usr_clave=$2 and usr_estado=true`,[usr_usuario,usr_clave])
+    res.json(response.rows)
 }
 //crear subida de imagen
+const SaveImage = async (req, res) => { 
+    const {pro_id, img_url, img_estado} = req.body;
+    const response = await pool.query('INSERT INTO imagen_producto(pro_id, img_url, img_estado)VALUES ( $1, $2, $3);',
+    [pro_id, img_url, img_estado])
 
+    res.json({
+        message: 'Imagen Subida Correctamente',
+        body: {
+            imagen:{img_url}
+        }
+    })
+}
 
 module.exports ={
     getClientes,
@@ -244,6 +251,7 @@ module.exports ={
     getPedidoDetalleByIdCabecera,
     CreatePedidoDetalle,
     Login,
+    SaveImage
 
 
 }
