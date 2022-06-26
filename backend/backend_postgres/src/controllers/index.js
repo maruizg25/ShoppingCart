@@ -12,7 +12,7 @@ const pool = new Pool({
 });
 
 // clientes
-const getClientes = async (req ,res)=>{
+const getClients = async (req ,res)=>{
     const response = await pool.query(`select per.per_cedula ,per.per_nombres, per.per_telefono,per.per_correo,usr.usr_estado from persona as per 
     inner join usuario
     as usr on per.usr_id = usr.usr_id and usr.usr_estado = true
@@ -20,18 +20,18 @@ const getClientes = async (req ,res)=>{
     res.status(200).json(response.rows);
 }
 
-const getClienteByCedula = async (req ,res)=>{ 
+const getClientByCedula = async (req ,res)=>{ 
     const per_cedula = req.params.per_cedula;
     const response = await pool.query('select * from persona where per_cedula= $1',[per_cedula])
     res.json(response.rows);
 }
 
-const getClienteById = async (req ,res)=>{ 
+const getClientById = async (req ,res)=>{ 
     const per_id = req.params.per_id;
     const response = await pool.query('select * from persona where per_id= $1',[per_id])
     res.json(response.rows);
 }
-const CreateUsuario = async (req ,res)=>{
+const CreateUser = async (req ,res)=>{
     const {rol_id,usr_usuario,usr_clave,usr_estado} = req.body;
     const response = await pool.query('INSERT INTO usuario (rol_id, usr_usuario, usr_clave, usr_estado) VALUES ($1, $2 ,$3 ,$4)', [rol_id,usr_usuario,usr_clave,usr_estado]);
     res.json({
@@ -42,7 +42,7 @@ const CreateUsuario = async (req ,res)=>{
     })
 }
 
-const ChangeStateUsuario = async (req ,res)=>{
+const ChangeStateUser = async (req ,res)=>{
     const usr_id = parseInt(req.params.usr_id);
     const {usr_estado} = req.body;
     const response =await pool.query('UPDATE usuario SET usr_estado=$1 WHERE usr_id=$2', [
@@ -52,13 +52,13 @@ const ChangeStateUsuario = async (req ,res)=>{
     res.json('Se ha cambiado el estado del usuario');
 }
 
-const getUsuarioById = async (req ,res)=>{ 
+const getUserById = async (req ,res)=>{ 
     const usr_id = req.params.usr_id;
     const response = await pool.query('select * from usuario where usr_id= $1',[usr_id])
     res.json(response.rows);
 }
 
-const CreateCliente = async (req ,res)=>{
+const CreateClient = async (req ,res)=>{
     const {usr_id, per_cedula, per_nombres, per_direccion, per_telefono,per_correo, per_estadocivil, per_ciudad} = req.body;
     const response = await pool.query(`INSERT INTO persona(usr_id, per_cedula, per_nombres, per_direccion, per_telefono, 
         per_correo, per_estadocivil, per_ciudad)
@@ -71,7 +71,7 @@ const CreateCliente = async (req ,res)=>{
     })
 }
 
-const UpdateCliente = async (req, res) => {
+const UpdateClient = async (req, res) => {
     const per_id = parseInt(req.params.per_id);
     const {usr_id, per_cedula, per_nombres, per_direccion, per_telefono,per_correo, per_estadocivil, per_ciudad} = req.body;
     const response = await pool.query(`UPDATE persona
@@ -87,24 +87,24 @@ const UpdateCliente = async (req, res) => {
 }
 
 // listar producto
-const getProductos = async (req, res) => {
+const getProducts = async (req, res) => {
     const response = await pool.query('select * from producto where pro_estado=true')
     res.json(response.rows);
 }
 // listar producto por nombre
-const getProductoByNombre = async (req, res) => { 
+const getProductByName = async (req, res) => { 
     const pro_nombre = req.params.pro_nombre;
     const response = await pool.query('select * from producto where pro_nombre=$1',[pro_nombre])
     res.json(response.rows);
 }
 // listar producto por id
-const getProductoById = async (req, res) => { 
+const getProductById = async (req, res) => { 
     const pro_id = req.params.pro_id;
     const response = await pool.query('select * from producto where pro_id=$1',[pro_id])
     res.json(response.rows);
 }
 // crear producto
-const CreateProducto = async (req, res) => {
+const CreateProduct = async (req, res) => {
     const {cat_id, pro_nombre,pro_descripcion, pro_cantidad, pro_precio, pro_estado, codigo_prod} = req.body;
     const response = await pool.query(`INSERT INTO producto( cat_id, pro_nombre, pro_descripcion, 
     pro_cantidad, pro_precio, pro_estado, codigo_prod)VALUES ($1, $2, $3, $4, $5, $6, $7);`
@@ -117,7 +117,7 @@ const CreateProducto = async (req, res) => {
     })
 }
 // actualizar producto
-const UpdateProducto = async (req, res) => {
+const UpdateProduct = async (req, res) => {
     const pro_id = parseInt(req.params.pro_id);
     console.log(pro_id)
     const {cat_id, pro_nombre,pro_descripcion, pro_cantidad, pro_precio, pro_estado, codigo_prod} = req.body;
@@ -141,7 +141,7 @@ const UpdateProducto = async (req, res) => {
     })
 }
 // eliminar producto
-const DeleteProducto = async (req, res) => {
+const DeleteProduct = async (req, res) => {
     const pro_id = parseInt(req.params.pro_id);
     const response = await pool.query('UPDATE producto SET pro_estado=false WHERE pro_id=$1'
     ,[ pro_id])
@@ -156,18 +156,18 @@ const DeleteProducto = async (req, res) => {
 
 
 //Listar todas las cabeceras
-const getPedidosCabecera = async (req, res) => {
+const getOrderHeaders = async (req, res) => {
     const response = await pool.query('select * from pedido_cabecera')
     res.json(response.rows);
 }
 // obtener pedido por codigo
-const getPedidosCabeceraById = async (req, res) => {
+const getOrderHeaderById = async (req, res) => {
     const ped_cab_id = req.params.ped_cab_id;
     const response = await pool.query('select * from pedido_cabecera where ped_cab_id=$1',[ped_cab_id])
     res.json(response.rows);
 }
 // obtener pedido por fecha
-const getPedidosCabeceraByDate = async (req, res) => {
+const getOrderHeaderByDate = async (req, res) => {
     const ped_cab_fecha = req.params.ped_cab_fecha;
     const response = await pool.query('select * from pedido_cabecera where ped_cab_fecha=$1',[ped_cab_fecha])
     res.json(response.rows);
@@ -175,7 +175,7 @@ const getPedidosCabeceraByDate = async (req, res) => {
 
 // crear pedido
 
-const CreatePedidoCabecera = async (req, res) => {
+const CreateOrderHeader = async (req, res) => {
     const {per_id, ped_cab_codigo, ped_cab_fecha, ped_cab_subtotal, ped_cab_iva, ped_cab_total} = req.body;
     const response = await pool.query(`INSERT INTO public.pedido_cabecera(
         per_id, ped_cab_codigo, ped_cab_fecha, ped_cab_subtotal, ped_cab_iva, ped_cab_total)
@@ -191,13 +191,13 @@ const CreatePedidoCabecera = async (req, res) => {
 
 
 // obtener detalle por codigoCabecera
-const getPedidoDetalleByIdCabecera = async (req, res) => {
+const getOrderDetailByHeaderId = async (req, res) => {
     const ped_cab_id = req.params.ped_cab_id;
     const response = await pool.query('select * from pedido_detalle where ped_cab_id=$1',[ped_cab_id])
     res.json(response.rows);
 }
 // crear detalle
-const CreatePedidoDetalle = async (req, res) => {
+const CreateOrderDetail = async (req, res) => {
     const {pro_id, ped_cab_id, ped_det_cant, ped_det_unitario, ped_det_total} = req.body;
     const response = await pool.query(`INSERT INTO public.pedido_detalle(pro_id, ped_cab_id, ped_det_cant, ped_det_unitario, ped_det_total)
 	VALUES ($1, $2, $3, $4, $5);`
@@ -230,26 +230,26 @@ const SaveImage = async (req, res) => {
 }
 
 module.exports ={
-    getClientes,
-    getClienteByCedula,
-    CreateUsuario,
-    ChangeStateUsuario,
-    getUsuarioById,
-    CreateCliente,
-    getClienteById,
-    UpdateCliente,
-    getProductos,
-    getProductoById,
-    getProductoByNombre,
-    CreateProducto,
-    UpdateProducto,
-    DeleteProducto,
-    getPedidosCabecera,
-    getPedidosCabeceraById,
-    getPedidosCabeceraByDate,
-    CreatePedidoCabecera,
-    getPedidoDetalleByIdCabecera,
-    CreatePedidoDetalle,
+    getClients,
+    getClientByCedula,
+    CreateUser,
+    ChangeStateUser,
+    getUserById,
+    CreateClient,
+    getClientById,
+    UpdateClient,
+    getProducts,
+    getProductById,
+    getProductByName,
+    CreateProduct,
+    UpdateProduct,
+    DeleteProduct,
+    getOrderHeaders,
+    getOrderHeaderById,
+    getOrderHeaderByDate,
+    CreateOrderHeader,
+    getOrderDetailByHeaderId,
+    CreateOrderDetail,
     Login,
     SaveImage
 
