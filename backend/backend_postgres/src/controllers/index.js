@@ -16,6 +16,9 @@ const pool = new Pool({
     }
 });
 
+
+
+
 // clientes
 const getClients = async (req, res) => {
     const response = await pool.query(`select per.per_cedula ,per.per_nombres, per.per_telefono,per.per_correo,usr.usr_estado from persona as per 
@@ -106,6 +109,12 @@ const getProductByName = async (req, res) => {
 const getProductById = async (req, res) => {
     const pro_id = req.params.pro_id;
     const response = await pool.query('select * from producto where pro_id=$1', [pro_id])
+    res.json(response.rows);
+}
+// listar producto por id
+const getProductByCategory = async (req, res) => {
+    const cat_id = req.params.cat_id;
+    const response = await pool.query('select * from producto where cat_id=$1', [cat_id])
     res.json(response.rows);
 }
 // crear producto
@@ -237,6 +246,13 @@ const Login = async (req, res) => {
         res.json({ mensaje: "Credenciales incorrectas" })
     }
 }
+
+// Obtener Imagen por Id
+const getImageById = async (req, res) => {
+    const pro_id = req.params.pro_id;
+    const response = await pool.query('SELECT * FROM imagen_producto where pro_id=$1', [pro_id])
+    res.json(response.rows);
+}
 //crear subida de imagen
 const SaveImage = async (req, res) => {
     const { pro_id, img_url, img_estado } = req.body;
@@ -263,6 +279,7 @@ module.exports = {
     getProducts,
     getProductById,
     getProductByName,
+    getProductByCategory,
     CreateProduct,
     UpdateProduct,
     DeleteProduct,
@@ -273,6 +290,7 @@ module.exports = {
     getOrderDetailByHeaderId,
     CreateOrderDetail,
     Login,
+    getImageById,
     SaveImage
 
 
