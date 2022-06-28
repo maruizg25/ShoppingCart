@@ -30,7 +30,7 @@ router.get('/clientes',rutasProtegidas,getClients);
 router.get('/clientes/cedula/:per_cedula',rutasProtegidas,getClientByCedula);
 router.get('/clientes/id/:per_id',rutasProtegidas,getClientById);
 router.get('/clientes/usuario/id/:usr_id',rutasProtegidas,getUserById);
-router.post('/clientes/usuario',rutasProtegidas,CreateUser);
+router.post('/clientes/usuario',CreateUser);
 router.post('/clientes',CreateClient)
 router.put('/clientes/usuario/:usr_id' ,rutasProtegidas,ChangeStateUser)
 router.put('/clientes/id/:per_id',rutasProtegidas,UpdateClient);
@@ -38,7 +38,7 @@ router.put('/clientes/id/:per_id',rutasProtegidas,UpdateClient);
 router.get('/productos',rutasProtegidas,getProducts);
 router.get('/productos/nombre/:pro_nombre',rutasProtegidas,getProductByName);
 router.get('/productos/id/:pro_id',rutasProtegidas,getProductById);
-router.get('/productos/categoria/:cat_id',getProductByCategory);
+router.get('/productos/categoria/:cat_id',rutasProtegidas,getProductByCategory);
 router.post('/productos',rutasProtegidas,CreateProduct);
 router.put('/productos/id/:pro_id',rutasProtegidas,UpdateProduct);
 router.put('/productos/delete/:pro_id',rutasProtegidas,DeleteProduct)
