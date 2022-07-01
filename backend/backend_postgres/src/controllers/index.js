@@ -228,10 +228,7 @@ const Login = async (req, res) => {
     const { usr_usuario, usr_clave } = req.body;
     const response = await pool.query(`select * from usuario where usr_usuario=$1 and usr_clave=$2 and usr_estado=true`, [usr_usuario, usr_clave])
     if (response.rows.length > 0) {
-        res.json({
-            mensaje: 'Autenticación correcta.',
-            rol: response.rows[0].rol_i
-        });
+        res.json(response.rows);
 
     } else {
         res.json({ mensaje: "Credenciales incorrectas" })
