@@ -26,30 +26,30 @@ const {getClients,getClientByCedula, getClientById, CreateUser, CreateClient, ge
     getOrderHeaderByDate, CreateOrderHeader, getOrderDetailByHeaderId, 
     CreateOrderDetail, Login, SaveImage, getProductByCategory, getImageById} = require('../controllers/index')
 //Cliente
-router.get('/clientes',rutasProtegidas,getClients);
-router.get('/clientes/cedula/:per_cedula',rutasProtegidas,getClientByCedula);
-router.get('/clientes/id/:per_id',rutasProtegidas,getClientById);
-router.get('/clientes/usuario/id/:usr_id',rutasProtegidas,getUserById);
+router.get('/clientes',getClients);
+router.get('/clientes/cedula/:per_cedula',getClientByCedula);
+router.get('/clientes/id/:per_id',getClientById);
+router.get('/clientes/usuario/id/:usr_id',getUserById);
 router.post('/clientes/usuario',CreateUser);
 router.post('/clientes',CreateClient)
-router.put('/clientes/usuario/:usr_id' ,rutasProtegidas,ChangeStateUser)
-router.put('/clientes/id/:per_id',rutasProtegidas,UpdateClient);
+router.put('/clientes/usuario/:usr_id',ChangeStateUser)
+router.put('/clientes/id/:per_id',UpdateClient);
 // Productos
-router.get('/productos',rutasProtegidas,getProducts);
-router.get('/productos/nombre/:pro_nombre',rutasProtegidas,getProductByName);
-router.get('/productos/id/:pro_id',rutasProtegidas,getProductById);
-router.get('/productos/categoria/:cat_id',rutasProtegidas,getProductByCategory);
-router.post('/productos',rutasProtegidas,CreateProduct);
-router.put('/productos/id/:pro_id',rutasProtegidas,UpdateProduct);
-router.put('/productos/delete/:pro_id',rutasProtegidas,DeleteProduct)
+router.get('/productos',getProducts);
+router.get('/productos/nombre/:pro_nombre',getProductByName);
+router.get('/productos/id/:pro_id',getProductById);
+router.get('/productos/categoria/:cat_id',getProductByCategory);
+router.post('/productos',CreateProduct);
+router.put('/productos/id/:pro_id',UpdateProduct);
+router.put('/productos/delete/:pro_id',DeleteProduct)
 //PedidosCabecera
-router.get('/pedidos/cabeceras',rutasProtegidas,getOrderHeaders);
-router.get('/pedidos/cabeceras/:ped_cab_id',rutasProtegidas,getOrderHeaderById);
-router.get('/pedidos/cabeceras/fecha/:ped_cab_fecha',rutasProtegidas,getOrderHeaderByDate)
-router.post('/pedidos/cabeceras',rutasProtegidas,CreateOrderHeader);
+router.get('/pedidos/cabeceras',getOrderHeaders);
+router.get('/pedidos/cabeceras/:ped_cab_id',getOrderHeaderById);
+router.get('/pedidos/cabeceras/fecha/:ped_cab_fecha',getOrderHeaderByDate)
+router.post('/pedidos/cabeceras',CreateOrderHeader);
 //PedidosDetalle
-router.get('/pedidos/detalles/:ped_cab_id',rutasProtegidas,getOrderDetailByHeaderId);
-router.post('/pedidos/detalles',rutasProtegidas,CreateOrderDetail)
+router.get('/pedidos/detalles/:ped_cab_id',getOrderDetailByHeaderId);
+router.post('/pedidos/detalles',CreateOrderDetail)
 //Login
 router.get('/login',Login)
 //SubidaImagenes url
