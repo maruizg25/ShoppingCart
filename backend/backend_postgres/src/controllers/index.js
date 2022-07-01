@@ -228,18 +228,9 @@ const Login = async (req, res) => {
     const { usr_usuario, usr_clave } = req.body;
     const response = await pool.query(`select * from usuario where usr_usuario=$1 and usr_clave=$2 and usr_estado=true`, [usr_usuario, usr_clave])
     if (response.rows.length > 0) {
-
-        const payload = {
-            check: true
-        };
-        const token = jwt.sign(payload, app.get('llave'), {
-            expiresIn: 1440
-        });
         res.json({
             mensaje: 'Autenticación correcta.',
-            rol: response.rows[0].rol_id,
-            token: token
-
+            rol: response.rows[0].rol_i
         });
 
     } else {
