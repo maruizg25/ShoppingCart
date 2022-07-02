@@ -24,7 +24,7 @@ const {getClients,getClientByCedula, getClientById, CreateUser, CreateClient, ge
     , ChangeStateUser, UpdateClient, getProducts, getProductByName, getProductById, 
     CreateProduct, UpdateProduct, DeleteProduct, getOrderHeaders, getOrderHeaderById, 
     getOrderHeaderByDate, CreateOrderHeader, getOrderDetailByHeaderId, 
-    CreateOrderDetail, Login, SaveImage, getProductByCategory, getImageById} = require('../controllers/index')
+    CreateOrderDetail, Login, SaveImage, getProductByCategory, getImageById, getOrderHeaderByCode} = require('../controllers/index')
 //Cliente
 router.get('/clientes',getClients);
 router.get('/clientes/cedula/:per_cedula',getClientByCedula);
@@ -45,6 +45,7 @@ router.put('/productos/delete/:pro_id',DeleteProduct)
 //PedidosCabecera
 router.get('/pedidos/cabeceras',getOrderHeaders);
 router.get('/pedidos/cabeceras/:ped_cab_id',getOrderHeaderById);
+router.get('/pedidos/cabeceras/codigo/:ped_cab_codigo',getOrderHeaderByCode);
 router.get('/pedidos/cabeceras/fecha/:ped_cab_fecha',getOrderHeaderByDate)
 router.post('/pedidos/cabeceras',CreateOrderHeader);
 //PedidosDetalle

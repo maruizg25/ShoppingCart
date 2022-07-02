@@ -180,6 +180,12 @@ const getOrderHeaderById = async (req, res) => {
     const response = await pool.query('select * from pedido_cabecera where ped_cab_id=$1', [ped_cab_id])
     res.json(response.rows);
 }
+//
+const getOrderHeaderByCode = async (req, res) => {
+    const ped_cab_codigo = req.params.ped_cab_codigo;
+    const response = await pool.query('select * from pedido_cabecera where ped_cab_codigo=$1', [ped_cab_codigo])
+    res.json(response.rows);
+}
 // obtener pedido por fecha
 const getOrderHeaderByDate = async (req, res) => {
     const ped_cab_fecha = req.params.ped_cab_fecha;
@@ -279,7 +285,8 @@ module.exports = {
     CreateOrderDetail,
     Login,
     getImageById,
-    SaveImage
+    SaveImage,
+    getOrderHeaderByCode
 
 
 }
