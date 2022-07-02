@@ -1,0 +1,97 @@
+<main>
+    <div class="container">
+        <h2>Pedidos Realizados</h2>
+        <div class="container__search">
+            <form [formGroup]="form">
+                <label for="search">Buscar Pedido</label>
+                <input type="text" placeholder="Ingrese Código Pedido" name="search" id="search"
+                    formControlName="txtCodigoPedido">
+                <button (click)="leerPedidoById()">Buscar</button>
+            </form>
+        </div>
+        <div class="container__orders">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Fecha Pedido</th>
+                        <th>Subtotal</th>
+                        <th>Iva</th>
+                        <th>Total ($)</th>
+                        <th>Ver Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of pedidos">
+                        <td>{{i.ped_cab_codigo}}</td>
+                        <td>{{i.ped_cab_fecha}}</td>
+                        <td>{{i.ped_cab_subtotal}}</td>
+                        <td>{{i.ped_cab_iva}}</td>
+                        <td>{{i.ped_cab_total}}</td>
+                        <td>
+                            <label class="details" (click)="leerDetalleByPedidoId(i.ped_cab_id)" for="closeModal">
+                                <i class="fas fa-file-alt"></i></label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <input type="checkbox" id="closeModal" name="closeModal">
+    <div id="Modal" class="modal">
+        <div class="modal__content">
+            <div class="modal__content__menu">
+                <h2>Detalles del Pedido</h2>
+                <div>
+                    <label for="closeModal"><i class="fas fa-times-circle"></i></label>
+                </div>
+            </div>
+            <div class="modal__content__header">
+                <div>
+                    <label>Código: </label>
+                    <p>001</p>
+                </div>
+                <div>
+                    <label>Fecha de Pedido: </label>
+                    <p>20/06/2022</p>
+                </div>
+            </div>
+            <div class="modal__content__orders">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código Producto</th>
+                            <th>Nombre Producto</th>
+                            <th>Precio Producto</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of detallesPedido">
+                            <td>001</td>
+                            <td>Mouse Inalámbrico RGB Gamer Bateria</td>
+                            <td>{{i.ped_det_unitario}}</td>
+                            <td>{{i.ped_det_cant}}</td>
+                            <td>{{i.ped_det_total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal__content__footer">
+                <div>
+                    <label>Subtotal: </label>
+                    <p>120</p>
+                </div>
+                <div>
+                    <label>Iva(12%): </label>
+                    <p>14.4</p>
+                </div>
+                <div>
+                    <label>Total: </label>
+                    <p>134.4</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
