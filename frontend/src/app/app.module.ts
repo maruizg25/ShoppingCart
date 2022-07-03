@@ -13,6 +13,7 @@ import { ClientOrderListComponent } from './components/client-order-list/client-
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { NavloginComponent } from './components/navlogin/navlogin.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PedidosComponent } from './components/pedidos/pedidos.component';
     ClienteComponent,
     ProductosComponent,
     PedidosComponent,
+    NavloginComponent,
   ],
   imports: [
     AppRoutingModule,
