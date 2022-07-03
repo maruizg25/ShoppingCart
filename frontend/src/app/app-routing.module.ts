@@ -5,6 +5,10 @@ import { ClientOrderListComponent } from './components/client-order-list/client-
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ViewProductoComponent } from './components/view-producto/view-producto.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
+
 
 
 const routes: Routes = [
@@ -13,7 +17,11 @@ const routes: Routes = [
   { path: 'client-order-list', component: ClientOrderListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'view-producto/:categoria', component: ViewProductoComponent}
+  { path: 'view-producto/:categoria', component: ViewProductoComponent},
+  { path:'pedido', component:  PedidosComponent},
+  { path:'productos', component: ProductosComponent },
+  { path:'cliente', component: ClienteComponent }
+  
 
 ];
 

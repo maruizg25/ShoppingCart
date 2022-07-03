@@ -10,6 +10,9 @@ import { ViewProductoComponent } from './components/view-producto/view-producto.
 import { NavheadComponent } from './components/navhead/navhead.component';
 import { MainComponent } from './components/main/main.component';
 import { ClientOrderListComponent } from './components/client-order-list/client-order-list.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { ClientOrderListComponent } from './components/client-order-list/client-
     MainComponent,
     LoginComponent,
     RegisterComponent,
-    ViewProductoComponent
+    ViewProductoComponent,
+    ClienteComponent,
+    ProductosComponent,
+    PedidosComponent,
   ],
   imports: [
     AppRoutingModule,
