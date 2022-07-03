@@ -47,6 +47,10 @@ export class ClientOrderListComponent implements OnInit {
     )
   }
 
+  public cambiarformatoFecha(date: any) {
+    var fecha = String(date)
+    return fecha.replace("T00:00:00.000Z", "")
+  }
   public leerPedidoById() {
     this.pedidoService.getOrderById(this.form.value.txtCodigoPedido).subscribe(
       (pedido: any) => {

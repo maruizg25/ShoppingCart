@@ -25,7 +25,7 @@
                 <tbody>
                     <tr *ngFor="let i of pedidos">
                         <td>{{i.ped_cab_codigo}}</td>
-                        <td>{{i.ped_cab_fecha}}</td>
+                        <td>{{cambiarformatoFecha(i.ped_cab_fecha)}}</td>
                         <td>{{i.ped_cab_subtotal}}</td>
                         <td>{{i.ped_cab_iva}}</td>
                         <td>{{i.ped_cab_total}}</td>
