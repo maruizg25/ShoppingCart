@@ -21,9 +21,9 @@
       <h2 class="create-account"> Iniciar Sesion</h2>  
         <br>
         <br>
-        <input type="text" placeholder="Usuario">
-        <input type="password" placeholder="Contraseña">
-        <input type="button" value="Iniciar Sesión">
+        <input type="text" [(ngModel)]="UsuarioDatos.usr_usuario"  placeholder="Usuario" name="usr_usuario">
+        <input type="password" [(ngModel)]="UsuarioDatos.usr_clave" placeholder="Contraseña" name="usr_clave">
+        <input type="button" value="Iniciar Sesión" (click)="LogIn()">
     </form>
     <div class="welcome-back">
       <div class="message">
