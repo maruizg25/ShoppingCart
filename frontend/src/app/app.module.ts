@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { NavheadComponent } from './components/navhead/navhead.component';
 import { MainComponent } from './components/main/main.component';
 import { ClientOrderListComponent } from './components/client-order-list/client-order-list.component';
@@ -16,8 +17,8 @@ import { ClientOrderListComponent } from './components/client-order-list/client-
     MainComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule

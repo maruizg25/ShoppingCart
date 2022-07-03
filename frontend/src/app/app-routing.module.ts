@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientOrderListComponent } from './components/client-order-list/client-order-list.component';
 import { MainComponent } from './components/main/main.component';
+import { ClientOrderListComponent } from './components/client-order-list/client-order-list.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -9,8 +10,10 @@ const routes: Routes = [
   { path: 'client-order-list', component: ClientOrderListComponent },
 ];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routingComponents = [MainComponent]
