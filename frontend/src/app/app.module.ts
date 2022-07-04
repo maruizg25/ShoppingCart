@@ -14,6 +14,8 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { NavloginComponent } from './components/navlogin/navlogin.component';
+import { HeaderComponent } from './components/header/header.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { NavloginComponent } from './components/navlogin/navlogin.component';
     ProductosComponent,
     PedidosComponent,
     NavloginComponent,
+    HeaderComponent,
+    CartComponent,
   ],
   imports: [
     AppRoutingModule,

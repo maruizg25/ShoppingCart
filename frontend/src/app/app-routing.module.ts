@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'client-order-list', component: ClientOrderListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'view-producto/:categoria', component: ViewProductoComponent},
+  { path: 'view-producto', component: ViewProductoComponent},
   { path:'pedido', component:  PedidosComponent},
   { path:'productos', component: ProductosComponent },
   { path:'cliente', component: ClienteComponent }
