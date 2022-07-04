@@ -57,10 +57,10 @@
     <div class="row">
         <ng-container *ngFor="let item of productList" >
             <div class="card col-mb-3">
-                <img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100" alt="">
+                <img src="{{item.pro_imagen}}" alt="">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.pro_nombre}}</h5>
                 <p><strong>Price:</strong> ${{item.pro_precio}}</p>
-                <button class="btn btn-success" >Añadir al carrito
+                <button class="btn btn-success" (click)="addToCart(item)" >Añadir al carrito
                     <i style="font-size: 20px;" class="fas fa-cart-plus">&nbsp;</i>
                 </button>
             </div>

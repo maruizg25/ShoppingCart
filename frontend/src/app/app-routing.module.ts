@@ -8,6 +8,7 @@ import { ViewProductoComponent } from './components/view-producto/view-producto.
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'view-producto', component: ViewProductoComponent},
   { path:'pedido', component:  PedidosComponent},
   { path:'productos', component: ProductosComponent },
-  { path:'cliente', component: ClienteComponent }
+  { path:'cliente', component: ClienteComponent },
+  { path:'cart', component: CartComponent }
   
 
 ];
