@@ -6,7 +6,7 @@
             <strong style="font-size: 30px;">Shopping Cart
             </strong>
             <div class="form-group">
-                <input type="text" class="form-control"  placeholder="Buscar productos">
+                <input type="text" name="searchTerm" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="Buscar productos">
             </div>
             <span class="fas fa-search search-icon"></span>
 

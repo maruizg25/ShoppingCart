@@ -16,6 +16,7 @@ import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { NavloginComponent } from './components/navlogin/navlogin.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CartComponent } from './components/cart/cart.component';
     NavloginComponent,
     HeaderComponent,
     CartComponent,
+    FilterPipe,
   ],
   imports: [
     AppRoutingModule,

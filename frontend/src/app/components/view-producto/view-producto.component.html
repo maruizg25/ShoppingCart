@@ -2,44 +2,44 @@
 <div class="card-top container-fluid">
     <div class="container d-flex">
         <div class="item">
-            <a>
+            <a (click)="filter('')">
                 <img src="" alt="">
                 <h6>Todo</h6>
             </a>
         </div>
         <div class="item">
-            <a>
+            <a (click)="filter('Electrodomesticos')">
                 <img src="" alt="">
                 <h6>Electrodomesticos</h6>
             </a>
         </div>
         <div class="item">
-            <a>
+            <a (click)="filter('Ropa')">
                 <img src="" alt="">
                 <h6>Ropa</h6>
             </a>
         </div>
         <div class="item">
-            <a>
+            <a (click)="filter('Accesorios')">
                 <img style="width: 62px; margin-top: 5px;" src="" alt="">
                 <h6>Accesorios</h6>
             </a>
         </div>
 
         <div class="item">
-            <a>
+            <a (click)="filter('Limpieza')">
                 <img style="width: 62px; margin-top: 5px;" src="" alt="">
                 <h6>Limpieza</h6>
             </a>
         </div>
         <div class="item">
-            <a>
+            <a (click)="filter('Aseo Personal')">
                 <img style="width: 62px; margin-top: 5px;" src="" alt="">
                 <h6>Aseo Personal</h6>
             </a>
         </div>
         <div class="item">
-            <a>
+            <a (click)="filter('Tecnologia')">
                 <img style="width: 62px; margin-top: 5px;" src="" alt="">
                 <h6>Tecnologia</h6>
             </a>
@@ -55,7 +55,7 @@
 
 <div class="container">
     <div class="row">
-        <ng-container *ngFor="let item of productList" >
+        <ng-container *ngFor="let item of filterCategory | filter:searchKey:'pro_nombre'" >
             <div class="card col-mb-3">
                 <img src="{{item.pro_imagen}}" alt="">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.pro_nombre}}</h5>
