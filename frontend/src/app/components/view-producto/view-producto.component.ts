@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
 import { ProductoService } from 'src/app/service/productos.service';
 
@@ -8,9 +8,12 @@ import { ProductoService } from 'src/app/service/productos.service';
   styleUrls: ['./view-producto.component.css']
 })
 export class ViewProductoComponent implements OnInit {
+  public cantidad1 : number = 0;
   public productList : any ;
   public filterCategory : any;
   searchKey:string ="";
+  @ViewChild('cantidad')
+  cantidad!: ElementRef;
   constructor(private productListService : ProductoService ,
     private cartService : CartService) { }
 
@@ -31,6 +34,7 @@ export class ViewProductoComponent implements OnInit {
 
   addToCart(item: any){
     this.cartService.addtoCart(item);
+    const data = document.getElementById("cantidad") 
   }
 
   filter(category:string){

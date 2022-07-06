@@ -12,10 +12,6 @@ export class ClientesService {
     public getClients() {
         return this.http.get(this.url);
     }
-    public Login() {
-        const url_login = "https://app-backend-sh-cart.herokuapp.com/login"
-        return this.http.get(url_login);
-    }
 
 
 

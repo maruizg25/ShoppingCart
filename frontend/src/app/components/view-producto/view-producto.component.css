@@ -15,6 +15,7 @@
 }
 
 .item {
+    cursor: grab;
     margin: 0px 15px;
     text-align: center;
 }

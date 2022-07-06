@@ -1,4 +1,4 @@
-<app-navhead></app-navhead>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,6 +24,7 @@
         <input type="text" [(ngModel)]="UsuarioDatos.usr_usuario"  placeholder="Usuario" name="usr_usuario">
         <input type="password" [(ngModel)]="UsuarioDatos.usr_clave" placeholder="Contraseña" name="usr_clave">
         <input type="button" value="Iniciar Sesión" (click)="LogIn()">
+        <input type="button" value="Regresar al menu" routerLink="/main">
     </form>
     <div class="welcome-back">
       <div class="message">
