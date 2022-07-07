@@ -51,8 +51,14 @@ export class ClientOrderListComponent implements OnInit {
     var fecha = String(date)
     return fecha.replace("T00:00:00.000Z", "")
   }
-  public leerPedidoById() {
-    this.pedidoService.getOrderById(this.form.value.txtCodigoPedido).subscribe(
+
+  public redonderNumero(numero: any) {
+    var numeroRedondeado = numero.toFixed(2);
+    return numeroRedondeado;
+  }
+  
+  public leerPedidoByCodigo() {
+    this.pedidoService.getOrderByCode(this.form.value.txtCodigoPedido).subscribe(
       (pedido: any) => {
         this.pedidos = pedido
         if (this.pedidos.length == 0) {
@@ -64,14 +70,56 @@ export class ClientOrderListComponent implements OnInit {
     )
   }
 
-  public leerDetalleByPedidoId(ped_cab_id: any) {
-    this.pedidoService.getDetailByHeaderId(ped_cab_id).subscribe(
+  public leerDetalleByCodigoPedido(ped_cab_codigo: any) {
+    this.pedidoService.getDetailByHeaderCode(ped_cab_codigo).subscribe(
       (detalle: any) => {
         this.detallesPedido = detalle
         console.log(this.detallesPedido);
       },
       (error) => console.warn(error)
     )
+  }
+
+  public generarComprobantePedido() {
+    var num = 2.111;
+    var num2 = num.toFixed(2);
+    // var generateData = function (amount: any) {
+    //   var result = [];
+    //   var data = {
+    //     coin: "100",
+    //     game_group: "GameGroup",
+    //     game_name: "XPTO2",
+    //     game_version: "25",
+    //     machine: "20485861",
+    //     vlt: "0"
+    //   };
+    //   for (var i = 0; i < amount; i += 1) {
+    //     data.coin = (i + 1).toString();
+    //     result.push(Object.assign({}, data));
+    //   }
+    //   return result;
+    // };
+
+    // const doc = new jsPDF('p', 'pt', 'a4');
+    // var result = [];
+    // result.push({
+    //   id: "Código Producto",
+    //   name: "Nombre Producto",
+    //   price: "Precio Producto",
+    //   cant: "Cantidad",
+    //   total: "Total"
+    // });
+
+    // var headers = {
+    //   id: "Código Producto",
+    //   name: "Nombre Producto",
+    //   price: "Precio Producto",
+    //   cant: "Cantidad",
+    //   total: "Total"
+    // };
+    // doc.text("Reporte", 105, 80);
+    // // doc.table(1, 1, generateData(100), headers, { autoSize: true });
+    // doc.save("prueba.pdf");
   }
 
 }

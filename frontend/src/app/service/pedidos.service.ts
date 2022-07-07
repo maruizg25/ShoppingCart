@@ -13,13 +13,13 @@ export class PedidosService {
     return this.http.get(url);
   }
 
-  public getOrderById(ped_cab_id: any) {
-    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/cabeceras/" + ped_cab_id;
+  public getOrderByCode(ped_codigo: any) {
+    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/cabeceras/codigo/" + ped_codigo;
     return this.http.get(url);
   }
 
-  public getDetailByHeaderId(det_cab_id: any) {
-    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/detalles/" + det_cab_id;
+  public getDetailByHeaderCode(det_cab_codigo: any) {
+    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/masterdetalle/codigo/" + det_cab_codigo;
     return this.http.get(url);
   }
   
