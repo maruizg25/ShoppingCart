@@ -5,6 +5,9 @@
         <div class="container__search">
             <form [formGroup]="form">
                 <label for="search">Buscar Pedido</label>
+                <div class="container__search__advertation">
+                    <p>No se permite el ingreso de caracteres.</p>
+                </div>
                 <input type="text" placeholder="Ingrese Código Pedido" name="search" id="search"
                     formControlName="txtCodigoPedido" >
                     <!-- (keyup)="leerPedidoByCodigo()"> -->

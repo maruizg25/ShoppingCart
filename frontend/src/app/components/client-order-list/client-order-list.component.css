@@ -26,6 +26,18 @@ main {
     color: rgb(41, 41, 41);
 }
 
+.container__search__advertation {
+    display: inline-block;
+    position: fixed;
+    background: #fff;
+    border: 1px solid #000;
+}
+
+.container__search__advertation p {
+    display: block;
+    padding: 1em;
+}
+
 .container__search form input {
     box-sizing: border-box;
     border: 1.5px solid #aaa;
