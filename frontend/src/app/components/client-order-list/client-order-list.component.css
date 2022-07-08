@@ -143,6 +143,7 @@ tr:hover td {
     margin: 5% auto;
     position: relative;
     border-radius: 5px;
+    overflow: scroll;
 }
 
 .modal__content__menu {
@@ -194,6 +195,10 @@ tr:hover td {
     margin-bottom: 1em;
 }
 
+.modal__content__header h2 {
+    width: 100%;
+}
+
 .modal__content__header div {
     display: flex;
 }
@@ -204,7 +209,8 @@ tr:hover td {
 }
 
 .modal__content__header p {
-    width: 10em;
+    padding: 0 2em;
+    width: auto;
     text-align: center;
 }
 

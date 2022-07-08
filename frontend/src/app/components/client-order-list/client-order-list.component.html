@@ -6,7 +6,8 @@
             <form [formGroup]="form">
                 <label for="search">Buscar Pedido</label>
                 <input type="text" placeholder="Ingrese Código Pedido" name="search" id="search"
-                    formControlName="txtCodigoPedido" (keyup)="leerPedidoByCodigo()">
+                    formControlName="txtCodigoPedido" >
+                    <!-- (keyup)="leerPedidoByCodigo()"> -->
                 <button (click)="leerPedidoByCodigo()">Buscar</button>
             </form>
         </div>
@@ -52,6 +53,7 @@
                 <button (click)="generarComprobantePedido()">Imprimir <i class="fas fa-print"></i></button>
             </div>
             <div class="modal__content__header">
+                <h2>Datos del Pedido</h2>
                 <div>
                     <label>Código: </label>
                     <p>{{detallesPedido[0].ped_cab_codigo}}</p>
@@ -59,6 +61,23 @@
                 <div>
                     <label>Fecha de Pedido: </label>
                     <p>{{cambiarformatoFecha(detallesPedido[0].ped_cab_fecha)}}</p>
+                </div>
+                <h2>Datos del Cliente</h2>
+                <div>
+                    <label>Cédula: </label>
+                    <p>{{detallesPedido[0].per_cedula}}</p>
+                </div>
+                <div>
+                    <label>Nombres: </label>
+                    <p>{{detallesPedido[0].per_nombres}}</p>
+                </div>
+                <div>
+                    <label>Correo: </label>
+                    <p>{{detallesPedido[0].per_correo}}</p>
+                </div>
+                <div>
+                    <label>Teléfono/Celular: </label>
+                    <p>{{detallesPedido[0].per_telefono}}</p>
                 </div>
             </div>
             <div class="modal__content__orders">
