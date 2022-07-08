@@ -6,7 +6,7 @@
             <form [formGroup]="form">
                 <label for="search">Buscar Pedido</label>
                 <input type="text" placeholder="Ingrese Código Pedido" name="search" id="search"
-                    formControlName="txtCodigoPedido">
+                    formControlName="txtCodigoPedido" (keyup)="leerPedidoByCodigo()">
                 <button (click)="leerPedidoByCodigo()">Buscar</button>
             </form>
         </div>
@@ -30,7 +30,8 @@
                         <td>{{redonderNumero(i.ped_cab_iva * i.ped_cab_subtotal)}}</td>
                         <td>{{i.ped_cab_total}}</td>
                         <td>
-                            <label class="details" (click)="leerDetalleByCodigoPedido(i.ped_cab_codigo)" for="closeModal">
+                            <label class="details" (click)="leerDetalleByCodigoPedido(i.ped_cab_codigo)"
+                                for="closeModal">
                                 <i class="fas fa-file-alt"></i></label>
                         </td>
                     </tr>
@@ -99,5 +100,3 @@
         </div>
     </div>
 </main>
-
-

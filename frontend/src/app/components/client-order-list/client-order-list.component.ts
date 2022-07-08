@@ -13,7 +13,28 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ClientOrderListComponent implements OnInit {
 
   pedidos: ModelPedido[] = [];
-  detallesPedido: ModelPedidoDetalle[] = [];
+  detallesPedido: ModelPedidoDetalle[] = [{
+    per_cedula: "",
+    per_nombres: "",
+    per_telefono: "",
+    per_correo: "",
+    pro_nombre: "",
+    pro_descripcion: "",
+    codigo_prod: "",
+    ped_cab_id: -1,
+    per_id: -1,
+    ped_cab_codigo: "",
+    ped_cab_fecha: "",
+    ped_cab_subtotal: -1,
+    ped_cab_iva: -1,
+    ped_cab_total: -1,
+    ped_det_id: -1,
+    ped_det_cant: -1,
+    ped_det_unitario: -1,
+    ped_det_total: -1
+  }
+  ];
+  cliente: string = '1004600183';
 
   public form!: FormGroup;
 
@@ -31,14 +52,14 @@ export class ClientOrderListComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.leerPedidos();
+    this.leerPedidosByCedula();
     this.form = this.formBuilder.group({
       txtCodigoPedido: ['']
     })
   }
 
-  public leerPedidos() {
-    this.pedidoService.getOrderHeaders().subscribe(
+  public leerPedidosByCedula() {
+    this.pedidoService.getOrderHeadersByCedula(this.cliente).subscribe(
       (pedido: any) => {
         this.pedidos = pedido
         console.log(this.pedidos)
@@ -56,13 +77,13 @@ export class ClientOrderListComponent implements OnInit {
     var numeroRedondeado = numero.toFixed(2);
     return numeroRedondeado;
   }
-  
+
   public leerPedidoByCodigo() {
     this.pedidoService.getOrderByCode(this.form.value.txtCodigoPedido).subscribe(
       (pedido: any) => {
         this.pedidos = pedido
         if (this.pedidos.length == 0) {
-          this.leerPedidos();
+          this.leerPedidosByCedula();
         }
         console.log(this.pedidos)
       },
