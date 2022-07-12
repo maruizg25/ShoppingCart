@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModelPedido } from '../../model/model.pedido';
 import { PedidosService } from '../../service/pedidos.service';
 import { ModelPedidoDetalle } from '../../model/model.pedido-detalle';
+import { formatDate } from "@angular/common";
 
+
+// import logo from '../../../assets/Carrito'
 
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
@@ -74,7 +77,7 @@ export class ClientOrderListComponent implements OnInit {
 
   public cambiarformatoFecha(date: any) {
     var fecha = String(date)
-    return fecha.replace("T00:00:00.000Z", "")
+    return fecha.replace("T05:00:00.000Z", "")
   }
 
   public redonderNumero(numero: any) {
@@ -105,18 +108,24 @@ export class ClientOrderListComponent implements OnInit {
     )
   }
 
-  header = [['Código', 'Nombre Producto', 'Precio', 'Cantidad', 'Total']]
+  header = [['Id', 'Código', 'Nombre Producto', 'Precio', 'Cantidad', 'Total']]
 
   tableData: any = []
 
   public llenarTableData() {
     var dataTable: any = []
+    let cont = 0;
     this.detallesPedido.forEach(detalle => {
-      dataTable.push(detalle.codigo_prod);
-      dataTable.push(detalle.pro_nombre);
-      dataTable.push(detalle.ped_det_unitario);
-      dataTable.push(detalle.ped_det_cant);
-      dataTable.push(detalle.ped_det_total);
+      cont++;
+      detalle.ped_cab_id = cont;
+      dataTable = [
+        detalle.ped_cab_id,
+        detalle.codigo_prod,
+        detalle.pro_nombre,
+        detalle.ped_det_unitario,
+        detalle.ped_det_cant,
+        detalle.ped_det_total
+      ]
       this.tableData.push(dataTable);
     });
   }
@@ -124,48 +133,58 @@ export class ClientOrderListComponent implements OnInit {
   public generarComprobantePedido() {
     this.llenarTableData();
 
-    console.log(this.detallesPedido);
-    console.log(this.tableData);
-
-
+    var logo = new Image();
+    logo.src = 'https://cdn0.iconfinder.com/data/icons/shopping-and-commerce-outline/512/Shopping_and_Commerce_-_Outline_21-512.png';
     // const doc = new jsPDF('p', 'pt', 'a4');
     const doc = new jsPDF();
 
     // -------------------------------------------------------------------------------------------
     //                  HEADER ORDER PDF
     // -------------------------------------------------------------------------------------------
-
+    doc.setFont('courier', 'bold');
     doc.setFontSize(26);
-    doc.text("Shopping Cart", 105, 35, { align: 'center' });
-    doc.text("This is centred text.", 105, 80, { align: 'center' });
-    doc.text("Datos del Pedido", 105, 90, { align: 'center' });
-    doc.text("Código Pedido: ", 105, 100);
-    doc.text("PC000001", 105, 100);
-    doc.text("Fecha de Pedido:", 105, 110);
-    doc.text("08/07/2022:", 105, 110);
-    doc.text("Datos del Cliente", 105, 120);
-    doc.text("Cédula:", 105, 130);
-    doc.text("Nombres:", 105, 130);
-    doc.text("Brayan Pulamarin:", 105, 80);
-    doc.text("Correo:", 105, 80);
-    doc.text("bapulamarinc@utn.edu.ec:", 105, 80);
-    doc.text("Teléfono:", 105, 80);
-    doc.text("0999999999", 105, 80);
+    doc.text("Shopping Cart", 105, 15, { align: 'center' });
+    doc.addImage(logo, 'PNG', 90, 20, 25, 20);
+    doc.setFontSize(14);
+    doc.setFont('courier', 'bold')
+    doc.text("Datos del Cliente", 55, 45, { align: 'center' });
+    doc.text("Datos del Pedido", 155, 45, { align: 'center' });
+
+    doc.text("____________________________________________________________", 105, 74, { align: 'center' });
+    doc.text("DETALLES DEL PEDIDO", 105, 81, { align: 'center' });
+    doc.text("____________________________________________________________", 105, 82, { align: 'center' });
+
+    doc.setFontSize(12);
+    doc.text("Cédula:", 15, 53, { align: 'left' });
+    doc.text("Nombres:", 15, 59, { align: 'left' });
+    doc.text("Correo:", 15, 65, { align: 'left' });
+    doc.text("Teléfono:", 15, 71, { align: 'left' });
+
+    doc.text("Código Pedido: ", 120, 53, { align: 'left' });
+    doc.text("Fecha de Pedido:", 120, 59, { align: 'left' });
+
+    doc.setFont('courier', 'normal');
+    doc.text(this.detallesPedido[0].per_cedula, 40, 53);
+    doc.text(this.detallesPedido[0].per_nombres, 40, 59);
+    doc.text(this.detallesPedido[0].per_correo, 40, 65);
+    doc.text(this.detallesPedido[0].per_telefono, 40, 71);
+
+    doc.text(this.detallesPedido[0].ped_cab_codigo, 165, 53);
+    doc.text(this.cambiarformatoFecha(this.detallesPedido[0].ped_cab_fecha), 165, 59);
 
     // -------------------------------------------------------------------------------------------
     //                  DETAILS ORDER PDF
     // -------------------------------------------------------------------------------------------
 
-    doc.setFontSize(18);
-    doc.text('My Team Detail', 11, 8);
-    doc.setFontSize(11);
-    doc.setTextColor(100);
-
     (doc as any).autoTable({
       head: this.header,
       body: this.tableData,
+      font: 'courier',
       theme: 'plain',
-      margin:{top: 100}
+      margin: {
+        top: 85,
+        bottom: 65
+      }
       // didDrawCell: data => {
       //   console.log(data.column.index)
       // }
@@ -175,22 +194,28 @@ export class ClientOrderListComponent implements OnInit {
     //                  FOOTER ORDER PDF
     // -------------------------------------------------------------------------------------------
 
-    doc.text("Subtotal:", 105, 200);
-    doc.text("100", 105, 80);
-    doc.text("Iva (12%):", 105, 80);
-    doc.text("1.20", 105, 80);
-    doc.text("Total:", 105, 80);
-    doc.text("11.20", 105, 80);
+    doc.setFont('courier', 'bold')
+    doc.text("Subtotal:  |", 66.5, 243);
+    doc.text("Iva:       |", 66.5, 251.5);
+    doc.text("Total:     |", 66.5, 260.5);
 
-    doc.text("____________________________________________", 105, 80);
-    doc.text("1727468512", 105, 80);
-    doc.text("Brayan Pulamarin", 105, 80);
+    doc.text("--------------+--------------", 95.7, 239, { align: 'center' });
+    doc.text("--------------+--------------", 95.7, 247.5, { align: 'center' });
+    doc.text("--------------+--------------", 95.7, 256, { align: 'center' });
+    doc.text("--------------+--------------", 95.7, 265, { align: 'center' });
 
-    doc.text("________________________________________________________________________________________________________________", 105, 80);
-    doc.text("Este documento cuenta con una validez de 30 días hábiles.", 105, 80);
-    doc.text("Fecha Generación Documento: 08/07/2022", 105, 80);
-    doc.text("________________________________________________________________________________________________________________", 105, 80);
 
+    doc.setFont('courier', 'normal')
+    doc.text("" + this.detallesPedido[0].ped_cab_subtotal, 105, 243);
+    doc.text("" + this.redonderNumero(this.detallesPedido[0].ped_cab_iva * this.detallesPedido[0].ped_cab_subtotal), 105, 251.5);
+    doc.text("" + this.detallesPedido[0].ped_cab_total, 105, 260.5);
+
+    doc.text("____________________________________________________________", 105, 275, { align: 'center' });
+    doc.setFontSize(10);
+    let fecha = formatDate(new Date(), 'dd-MM-yyyy', 'en-US')
+    doc.text("Este documento cuenta con una validez de 30 días hábiles.", 105, 280, { align: 'center' });
+    doc.text("Fecha Generación Documento: " + fecha, 105, 285, { align: 'center' });
+    
     doc.output('dataurlnewwindow');
   }
 

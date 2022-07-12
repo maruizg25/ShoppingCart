@@ -5,7 +5,7 @@
 */
 
 .wrapper {
-    background: #E17563;
+    background: #28A745;
     /* position: fixed; */
     width: 100%;
     transition: all 0.5s ease;
@@ -24,6 +24,7 @@
     display: flex;
     height: 100%;
     margin-right: 4em;
+    margin-bottom: 0;
 }
 
 .wrapper__links li {
@@ -34,15 +35,15 @@
 }
 
 .wrapper__links li:hover>a {
-    border-bottom: 2px solid #fff;
-    color: #fff;
+    border-bottom: 2px solid #8fdda1;
+    color: #8fdda1;
     background: rgba(0, 0, 0, 0.4);
     transition: all 0.5s ease;
 }
 
 .wrapper__links li a {
-    border-bottom: 2px solid #000;
-    color: #000;
+    border-bottom: 2px solid #fff;
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
     padding: 21px 17px;
@@ -56,11 +57,11 @@
     width: 4.5em;
     height: 100%;
     cursor: pointer;
-    border-bottom: 2px solid #E17563;
+    border-bottom: 2px solid #28A745;
 }
 
 .wrapper__link-user:hover {
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #8fdda1;
     background: rgba(0, 0, 0, 0.4);
 }
 
@@ -73,7 +74,7 @@
 }
 
 .wrapper__link-user ul {
-    background: #E17563;
+    background: #28A745;
     position: absolute;
     height: auto;
     top: 70px;
@@ -95,13 +96,13 @@
 }
 
 .wrapper__link-user ul li:hover>a {
-    color: #fff;
+    color: #8fdda1;
     background: rgba(0, 0, 0, 0.4);
     transition: all 0.5s ease;
 }
 
 .wrapper__link-user ul li a {
-    color: #000;
+    color: #fff;
     display: block;
     width: 100%;
     font-size: 18px;
