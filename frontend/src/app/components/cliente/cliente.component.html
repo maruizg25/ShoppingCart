@@ -119,12 +119,13 @@
                             </label>                            
                             
                           </div>
-                          <div class="form-group">
-                            <input type="text" name="Cedula" formControlName="per_cedula" class="form-control"  value="{{informacionCliente.per_cedula}}">
-                            
-                          </div>
+                         
                           <div class="form-group">
                             <input type="text" name="Nombre" formControlName="per_nombres" class="form-control"  value="{{informacionCliente.per_nombres}}">
+                              
+                          </div>
+                          <div class="form-group">
+                            <input type="text" name="Direccion" formControlName="per_nombres" class="form-control"  value="{{informacionCliente.per_nombres}}">
                               
                           </div>
                           <div class="form-group">
@@ -135,17 +136,23 @@
                             <input type="text" name="Correo" formControlName="per_correo" class="form-control"  value="{{informacionCliente.per_correo}}">
                               
                           </div>
+
                           <div class="form-group">
-                            <input type="text" name="Estado Civil" formControlName="per_estadocivil" class="form-control"  value="{{informacionCliente.per_estadocivil}}">
-                             
+                            <input type="text" name="Clave" formControlName="per_correo" class="form-control"  value="{{informacionCliente.per_correo}}">
+                              
                           </div>
                           <div class="form-group">
                             <input type="text" name="Ciudad" formControlName="per_ciudad" class="form-control"  value="{{informacionCliente.per_ciudad}}">
                              
-                          </div>                              
+                          </div>  
+                          <div class="form-group">
+                            <input type="text" name="Estado Civil" formControlName="per_estadocivil" class="form-control"  value="{{informacionCliente.per_estadocivil}}">
+                             
+                          </div>
+                                                    
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"  >Actualizar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="actualizarCliente(informacionCliente.per_id , informacionCliente)" >Actualizar</button>
                           </div>
                         </form>
                       </div>

@@ -77,7 +77,7 @@ export class ClientOrderListComponent implements OnInit {
 
   public cambiarformatoFecha(date: any) {
     var fecha = String(date)
-    return fecha.replace("T05:00:00.000Z", "")
+    return fecha.replace("T00:00:00.000Z", "")
   }
 
   public redonderNumero(numero: any) {

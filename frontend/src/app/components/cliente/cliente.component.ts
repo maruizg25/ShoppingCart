@@ -14,7 +14,7 @@ export class ClienteComponent implements OnInit {
   clientefromGroup!: FormGroup;
 
   public informacionCliente = {
-    per_id: '',
+    per_id: 0,
     per_cedula: '',
     per_nombres: '',
     per_telefono: '',
@@ -53,12 +53,17 @@ export class ClienteComponent implements OnInit {
       });
   }
   
+  public actualizarCliente(per_id:any , cliente:any){
+    this._clienteService.updateCliente(per_id , cliente).subscribe(
+      res => {
+        this.getAllClientes();
+      });
+    }
   
   public eliminarCliente(per_id:any , cliente:any){
     this._clienteService.deleteCliente(per_id , cliente).subscribe(
       res => {
         this.getAllClientes();
-        console.log('Borrado');
       });
     }
 

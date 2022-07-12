@@ -23,8 +23,8 @@ export class ClientesService {
         return this.http.get<ModelCliente>(this.url + "/" + id);
     }
    
-    updateCliente(id: string, dto:updateClienteDTO){
-        return this.http.put< ModelCliente>(this.url + "/" + id, dto);
+    updateCliente(id: any,cliente:any){
+        return this.http.put< ModelCliente>(this.url +"/id/"+id,cliente);
     }
     deleteCliente(id: any,cliente:any){
         const urlb = "https://app-backend-sh-cart.herokuapp.com/clientes/delete/id/"+id;
