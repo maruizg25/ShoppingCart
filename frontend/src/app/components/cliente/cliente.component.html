@@ -55,7 +55,7 @@
         <div class="card">
           <div class="card-header" class="alert alert-primary" role="alert">
             Administración de Clientes
-          </div>
+          </div>     
 
         </div>
       </div>
@@ -73,7 +73,7 @@
       </div>
       <div class="col-md-12">
         <table class="table table-warning table-bordered border-primary">
-          <thead>
+          <thead >
             <tr>
               <th>Cedula</th>
               <th>Nombres</th>
@@ -84,19 +84,21 @@
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+          <tbody >
+            <tr *ngFor="let cliente of clientes" >
+              <td>{{cliente.per_cedula}}</td>
+              <td>{{cliente.per_nombres}}</td>
+              <td>{{cliente.per_telefono}}</td>
+              <td>{{cliente.per_correo}}</td>
+              <td>{{cliente.per_estadocivil}}</td>
+              <td>{{cliente.per_ciudad}}</td>
               <td class="d-flex justify-content-center">
-                <a class="btn btn-danger">
+                <a class="btn btn-danger" (click)="eliminarCliente(cliente.per_id ,cliente)">
                   <i class="fas fa-trash-alt"></i>
                 </a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#editarCliente">
+                <a class="btn btn-success" data-toggle="modal" data-target="#editarCliente" 
+                (click)="infoCliente(cliente.per_id,cliente.per_cedula,cliente.per_nombres,cliente.per_telefono,
+                cliente.per_correo,cliente.per_direccion,cliente.per_estadocivil,cliente.per_ciudad)">
                   <i class="fas fa-edit"></i>
                 </a>
                 <div class="modal fade" id="editarCliente" tabindex="-1" role="dialog"
@@ -104,52 +106,46 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>
+                        <h3 class="modal-title" id="exampleModalLabel">Editar Cliente</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form>
+                        <form [formGroup]="clientefromGroup">
                           <div class="form-group">
-                            <label>
-
-                            </label>
-                            <input type="text" name="Cedula" formControlName="txtcedula" placeholder="Insertar cedula"
-                              class="form-control">
+                            <label name ="Codigo Cliente">
+                              <h4> Persona ID : {{informacionCliente.per_id}}</h4>                                
+                            </label>                            
+                            
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Nombre" formControlName="txtnombre" placeholder="Insertar nombre"
-                              class="form-control">
+                            <input type="text" name="Cedula" formControlName="per_cedula" class="form-control"  value="{{informacionCliente.per_cedula}}">
+                            
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Telefono" formControlName="txttelefono"
-                              placeholder="Insertar telefono" class="form-control">
+                            <input type="text" name="Nombre" formControlName="per_nombres" class="form-control"  value="{{informacionCliente.per_nombres}}">
+                              
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Correo" formControlName="txtcorreo" placeholder="Insertar Correo"
-                              class="form-control">
+                            <input type="text" name="Telefono" formControlName="per_telefono" class="form-control"  value="{{informacionCliente.per_telefono}}">
+                              
                           </div>
                           <div class="form-group">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                              <option selected>Ciudad</option>
-                              <option value="1">Ibarra</option>
-                              <option value="2">Otavalo</option>
-                              <option value="3">Atuntaqui</option>
-                            </select>
+                            <input type="text" name="Correo" formControlName="per_correo" class="form-control"  value="{{informacionCliente.per_correo}}">
+                              
                           </div>
                           <div class="form-group">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                              <option selected>Estado civil</option>
-                              <option value="1">Casado</option>
-                              <option value="2">Divorciado</option>
-                              <option value="3">Soltero</option>
-                            </select>
+                            <input type="text" name="Estado Civil" formControlName="per_estadocivil" class="form-control"  value="{{informacionCliente.per_estadocivil}}">
+                             
                           </div>
-
+                          <div class="form-group">
+                            <input type="text" name="Ciudad" formControlName="per_ciudad" class="form-control"  value="{{informacionCliente.per_ciudad}}">
+                             
+                          </div>                              
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Actualizar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"  >Actualizar</button>
                           </div>
                         </form>
                       </div>

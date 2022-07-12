@@ -17,6 +17,9 @@ import { NavloginComponent } from './components/navlogin/navlogin.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FilterPipe } from './shared/filter.pipe';
+import { EditarClienteComponent } from './components/editar-cliente/editar-cliente.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -34,13 +37,15 @@ import { FilterPipe } from './shared/filter.pipe';
     HeaderComponent,
     CartComponent,
     FilterPipe,
+    EditarClienteComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
