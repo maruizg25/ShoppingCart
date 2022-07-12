@@ -49,56 +49,133 @@
       </li>
     </ul>
   </nav>
-  <div class="container" style="margin-top: 40px;">
-    <div class="row">
-      <div class="col-md-5">
-        <div class="card">
-          <div class="card-header" class="alert alert-primary" role="alert">
-            Administración de Pedidos
-          </div>
-
-        </div>
-      </div>
-      <div class="col-md-12">
-        <br>
-      </div>
-      <div class="container-fluid">
-        <form class="d-flex" role="search">
-          <input class="form-control me-3" width="50" type="search" placeholder="Busqueda" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Busqueda</button>
-        </form>
-      </div>
-      <div class="col-md-12">
-        <br>
-      </div>
-      <div class="col-md-12">
-        <table class="table table-warning table-bordered border-primary">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Fecha Pedido</th>
-              <th>Nombre Cliente</th>
-              <th>Descripcion</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              <th>Comprobante</th>
-            </tr>
-          </thead>
-           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-           </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="col-md-12">
+    <br>
   </div>
+  <div class="container">
+    <div class="card-header" class="alert alert-primary" role="alert">
+      Administración de Productos
+    </div>
+    
+    <div class="col-md-12">
+      <br>
+    </div>
+    <div class="container-fluid">
+      <form [formGroup]="form1" class="d-flex" role="search">
+        <input class="form-control me-3" width="50" type="search" placeholder="Busqueda por codigo" formControlName="txtpro_codigo" aria-label="Search">
+        <button class="btn btn-outline-success" (click)="leerPedidoByCodigo()" type="submit">Busqueda</button>
+      </form>
+    </div>
+    <div class="col-md-12">
+      <br>
+    </div>
+    <div class="container__orders">
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Fecha Pedido</th>
+                    <th>Subtotal</th>
+                    <th>Iva</th>
+                    <th>Total ($)</th>
+                    <th>Ver Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of pedidos">
+                    <td>{{i.ped_cab_codigo}}</td>
+                    <td>{{cambiarformatoFecha(i.ped_cab_fecha)}}</td>
+                    <td>{{i.ped_cab_subtotal}}</td>
+                    <td>{{redonderNumero(i.ped_cab_iva * i.ped_cab_subtotal)}}</td>
+                    <td>{{i.ped_cab_total}}</td>
+                    <td>
+                        <label class="details" (click)="leerDetalleByCodigoPedido(i.ped_cab_codigo)"
+                            for="closeModal">
+                            <i class="fas fa-file-alt"></i></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<input type="checkbox" id="closeModal" name="closeModal">
+<div id="Modal" class="modalDetails">
+    <div class="modal__content">
+        <div class="modal__content__menu">
+            <h2>Detalles del Pedido</h2>
+            <div>
+                <label for="closeModal"><i class="fas fa-times-circle"></i></label>
+            </div>
+        </div>
+        <div class="modal__content__print">
+            <button (click)="generarComprobantePedido()">Imprimir <i class="fas fa-print"></i></button>
+        </div>
+        <div class="modal__content__header">
+            <h2>Datos del Pedido</h2>
+            <div>
+                <label>Código: </label>
+                <p>{{detallesPedido[0].ped_cab_codigo}}</p>
+            </div>
+            <div>
+                <label>Fecha de Pedido: </label>
+                <p>{{cambiarformatoFecha(detallesPedido[0].ped_cab_fecha)}}</p>
+            </div>
+            <h2>Datos del Cliente</h2>
+            <div>
+                <label>Cédula: </label>
+                <p>{{detallesPedido[0].per_cedula}}</p>
+            </div>
+            <div>
+                <label>Nombres: </label>
+                <p>{{detallesPedido[0].per_nombres}}</p>
+            </div>
+            <div>
+                <label>Correo: </label>
+                <p>{{detallesPedido[0].per_correo}}</p>
+            </div>
+            <div>
+                <label>Teléfono/Celular: </label>
+                <p>{{detallesPedido[0].per_telefono}}</p>
+            </div>
+        </div>
+        <div class="modal__content__orders">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código Producto</th>
+                        <th>Nombre Producto</th>
+                        <th>Precio Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of detallesPedido">
+                        <td>{{i.codigo_prod}}</td>
+                        <td>{{i.pro_nombre}}</td>
+                        <td>{{i.ped_det_unitario}}</td>
+                        <td>{{i.ped_det_cant}}</td>
+                        <td>{{i.ped_det_total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal__content__footer">
+            <div>
+                <label>Subtotal: </label>
+                <p>{{detallesPedido[0].ped_cab_subtotal}}</p>
+            </div>
+            <div>
+                <label>Iva(12%): </label>
+                <p>{{redonderNumero(detallesPedido[0].ped_cab_iva * detallesPedido[0].ped_cab_subtotal)}}</p>
+            </div>
+            <div>
+                <label>Total: </label>
+                <p>{{detallesPedido[0].ped_cab_total}}</p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
