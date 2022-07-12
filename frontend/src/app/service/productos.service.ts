@@ -10,11 +10,46 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-  getProduct(){
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+  public getProduct(){
     return this.http.get<any>("https://app-backend-sh-cart.herokuapp.com/productos")
     .pipe(map((res:any)=>{
       return res;
     }))
+  }
+  public getProducts() {
+    const url = "https://app-backend-sh-cart.herokuapp.com/productos";
+    return this.http.get(url);
+  }
+
+  public getProductById(pro_id: any) {
+    const url = "https://app-backend-sh-cart.herokuapp.com/productos/" + pro_id;
+    return this.http.get(url);
+  }
+
+  public getProductByName(pro_name: any) {
+    const url = "https://app-backend-sh-cart.herokuapp.com/productos/" + pro_name;
+    return this.http.get(url);
+  }
+
+  public deleteProduct(pro_id:any){
+    const url= `https://app-backend-sh-cart.herokuapp.com/productos`+pro_id
+    return this.http.delete(url)
+  }
+  
+  public postCreateProduct(body:any){
+    const url= `https://app-backend-sh-cart.herokuapp.com/productos`
+    return this.http.post(url,body)
+  }
+  
+  public putUpdateProduct(body:any){
+    const url= `https://app-backend-sh-cart.herokuapp.com/productos`
+    return this.http.put(url,body)
   }
 
 }

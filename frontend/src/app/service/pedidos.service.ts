@@ -13,6 +13,16 @@ export class PedidosService {
     return this.http.get(url);
   }
 
+  public getOrderById(ped_cab_id: any) {
+    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/cabeceras/" + ped_cab_id;
+    return this.http.get(url);
+  }
+
+  public getDetailByHeaderId(det_cab_id: any) {
+    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/detalles/" + det_cab_id;
+    return this.http.get(url);
+  }
+
   public getOrderHeadersByCedula(per_cedula: any) {
     const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/cabeceras/cedula/" + per_cedula;
     return this.http.get(url);

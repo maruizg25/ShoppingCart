@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menú Responsive</title>
-  <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -22,7 +22,7 @@
       ADMINISTRADOR
     </a>
     <ul>
-      
+
       <li>
         <a href="pedido">
           <img src="../assets/Ordering_25406.ico" alt="" class="logo">
@@ -42,7 +42,7 @@
         </a>
       </li>
       <li>
-        <a href ="/main">
+        <a href="/main">
           <img src="../assets/Logout_37127.ico" alt="" class="logo">
           Cerrar Sesión
         </a>
@@ -57,10 +57,11 @@
             Administración de Productos
           </div>
           <div class="card-body">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#crearPizza">Nuevo
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
+              data-target="#crearProductos">Nuevo
               Producto</button>
           </div>
-          <div class="modal fade" id="crearPizza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          <div class="modal fade" id="crearProductos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -71,48 +72,45 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form [formGroup]="form">
                     <div class="form-group">
                       <label>
 
                       </label>
-                      <input type="text" name="Codigo producto" formControlName="txtcodigo"
+                      <input type="text" name="Codigo producto" formControlName="txtpro_codigo"
                         placeholder="Insertar codigo producto" class="form-control">
                     </div>
                     <div class="form-group">
-                      <input type="text" name="Nombre Producto" formControlName="txtnombre"
+                      <input type="text" name="Nombre Producto" formControlName="txtpro_nombres"
                         placeholder="Insertar nombre producto" class="form-control">
                     </div>
                     <div class="form-group">
-                      <input type="text" name="Descripcion Producto" formControlName="txtnombre"
-                        placeholder="Insertar nombre producto" class="form-control">
+                      <input type="text" name="Descripcion Producto" formControlName="txtpro_descripcion"
+                        placeholder="Insertar descripcion producto" class="form-control">
                     </div>
-                    <div class="form-group">
-                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option selected>Categorias</option>
-                        <option value="1">Ropa</option>
-                        <option value="2">Electrodomesticos</option>
-                        <option value="3">Accesorios</option>
-                        <option value="4">Aseo personal</option>
-                        <option value="5">Tecnologia</option>
-                        <option value="6">Herramientas</option>
+                    <div class="form-group  form-group input-group mb-3">
+                      <span class="input-group-text">Categorias</span>
+                      <select name="form-select" formControlName="categoriaSelected">
+                        <option *ngFor="let c of categorias" [value]="c.cat_id">{{c.cat_descripcion}}
+                        </option>
                       </select>
                     </div>
                     <div class="form-group">
-                      <input type="text" name="Cantidad" formControlName="txtcantidad" placeholder="Insertar cantidad"
+                      <input id="cantidad" type="number" formControlName="txtcantidad" placeholder="Insertar cantidad"
+                        #cantidad min="1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="Imagen" formControlName="txtpro_imagen" placeholder="Insertar URL imagen"
                         class="form-control">
                     </div>
                     <div class="form-group">
-                      <input type="text" name="Precio" formControlName="txtprecio" placeholder="Insertar Precio"
+                      <input type="text" name="Precio" formControlName="txtpro_precio" placeholder="Insertar Precio"
                         class="form-control">
                     </div>
-                    <div class="form-group">
-                      <button type="button" class="btn btn-primary">Seleccione la
-                        imagen</button>
-                    </div>
+
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Crear</button>
+                      <button type="button" class="btn btn-primary" (click)="postProduct()" data-dismiss="modal">Crear</button>
                     </div>
                   </form>
                 </div>
@@ -125,9 +123,9 @@
         <br>
       </div>
       <div class="container-fluid">
-        <form class="d-flex" role="search">
-          <input class="form-control me-3" width="50" type="search" placeholder="Busqueda" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Busqueda</button>
+        <form [formGroup]="form" class="d-flex" role="search">
+          <input class="form-control me-3" width="50" type="search" formControlName="txtpro_id" placeholder="Busqueda por nombre" aria-label="Search">
+          <button class="btn btn-outline-success"  type="submit">Busqueda</button>
         </form>
       </div>
       <div class="col-md-12">
@@ -138,40 +136,45 @@
         <table class="table table-warning table-bordered border-primary">
           <thead>
             <tr>
-              <th>Codigo</th>
-              <th>Nombre</th>
-              <th>Descripcion</th>
+              <th>ID</th>
+              <th>Codigo Producto</th>
               <th>Categoria</th>
+              <th>Nombre producto</th>
+              <th>Descripcion producto</th>
               <th>Cantidad</th>
               <th>Precio</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let p of productos">
               <td>
-
+                {{p.pro_id}}
               </td>
               <td>
-
+                {{p.codigo_prod}}
               </td>
               <td>
-
+                {{p.cat_id}}
               </td>
               <td>
-
+                {{p.pro_nombre}}
               </td>
               <td>
-
+                {{p.pro_descripcion}}
               </td>
               <td>
-
+                {{p.pro_cantidad}}
+              </td>
+              <td>
+                {{p.pro_precio}}
               </td>
               <td class="d-flex justify-content-center">
-                <a class="btn btn-danger">
+                <a class="btn btn-danger" (click)="deleteProduct(p.pro_id)">
                   <i class="fas fa-trash-alt"></i>
                 </a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#editarProducto">
+                <a class="btn btn-success" data-toggle="modal" data-target="#editarProducto"
+                  (click)="infoUpdateProducto(p.pro_id,p.codigo_prod,p.cat_id,p.pro_nombre,p.pro_descripcion,p.pro_cantidad,p.pro_precio,p.pro_imagen)">
                   <i class="fas fa-edit"></i>
                 </a>
                 <div class="modal fade" id="editarProducto" tabindex="-1" role="dialog"
@@ -185,49 +188,47 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form>
+                        <form [formGroup]="form">
                           <div class="form-group">
                             <label>
-
+                              <label>
+                                <h6>Id Producto:{{informacionProducto.pro_id}}</h6>
+                              </label>
                             </label>
-                            <input type="text" name="Codigo producto" formControlName="txtcodigo"
-                              placeholder="Insertar codigo producto" class="form-control">
+                            <input type="text" name="Codigo producto" formControlName="txtpro_codigo"
+                              placeholder="{{informacionProducto.pro_codigo}}" class="form-control">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Nombre Producto" formControlName="txtnombre"
-                              placeholder="Insertar nombre producto" class="form-control">
+                            <input type="text" name="Nombre Producto" formControlName="txtpro_nombres"
+                              placeholder="{{informacionProducto.pro_nombres}}" class="form-control">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Descripcion Producto" formControlName="txtnombre"
-                              placeholder="Insertar nombre producto" class="form-control">
+                            <input type="text" name="Descripcion Producto" formControlName="txtpro_descripcion"
+                              placeholder="{{informacionProducto.pro_descripcion}}" class="form-control">
                           </div>
-                          <div class="form-group">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                              <option selected>Categorias</option>
-                              <option value="1">Ropa</option>
-                              <option value="2">Electrodomesticos</option>
-                              <option value="3">Accesorios</option>
-                              <option value="4">Asea personal</option>
-                              <option value="5">Tecnologia</option>
-                              <option value="6">Limpieza</option>
+                          <div class="form-group  form-group input-group mb-3">
+                            <span class="input-group-text">Categorias</span>
+                            <select name="form-select" formControlName="categoriaSelected">
+                              <option *ngFor="let c of categorias" [value]="c.cat_id">{{c.cat_descripcion}
+                                </option>
                             </select>
+                        </div>  
+                          <div class="form-group">
+                            <input id="cantidad" type="number" formControlName="txtcantidad"
+                              placeholder="{{informacionProducto.pro_cantidad}}" #cantidad min="1">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Cantidad" formControlName="txtcantidad"
-                              placeholder="Insertar cantidad" class="form-control">
-                          </div>
-
-                          <div class="form-group">
-                            <input type="text" name="Precio" formControlName="txtprecio" placeholder="Insertar Precio"
-                              class="form-control">
+                            <input type="text" name="Imagen" formControlName="txtpro_imagen"
+                              placeholder="{{informacionProducto.pro_imagen}}" class="form-control">
                           </div>
                           <div class="form-group">
-                            <button type="button" class="btn btn-primary">Seleccione la
-                              imagen</button>
+                            <input type="text" name="Precio" formControlName="txtpro_precio"
+                              placeholder="{{informacionProducto.pro_precio}}" class="form-control">
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Actualizar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                              (click)="actualizarProducto(informacionProducto.pro_id)">Actualizar</button>
                           </div>
                         </form>
                       </div>
