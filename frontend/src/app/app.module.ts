@@ -19,6 +19,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FilterPipe } from './shared/filter.pipe';
 import { EditarClienteComponent } from './components/editar-cliente/editar-cliente.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterPedidosPipe } from './shared/filter-pedidos.pipe';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CartComponent,
     FilterPipe,
     EditarClienteComponent,
+    FilterPedidosPipe,
   ],
   imports: [
     AppRoutingModule,

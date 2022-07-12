@@ -3,16 +3,11 @@
     <div class="container">
         <h2>Pedidos Realizados</h2>
         <div class="container__search">
-            <form [formGroup]="form">
-                <label for="search">Buscar Pedido</label>
-                <div class="container__search__advertation">
-                    <p>No se permite el ingreso de caracteres.</p>
-                </div>
-                <input type="text" placeholder="Ingrese Código Pedido" name="search" id="search"
-                    formControlName="txtCodigoPedido" >
-                    <!-- (keyup)="leerPedidoByCodigo()"> -->
-                <button (click)="leerPedidoByCodigo()">Buscar</button>
-            </form>
+            <label for="search">Buscar Pedido</label>
+            <div class="container__search__advertation">
+                <p>No se permite el ingreso de caracteres.</p>
+            </div>
+            <input type="text" placeholder="Ingrese Código Pedido" name="codigoPedido" [(ngModel)]="codigoPedido">
         </div>
         <div class="container__orders">
             <table>
@@ -27,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let i of pedidos">
+                    <tr *ngFor="let i of (pedidos | filterPedidos: codigoPedido: page)[0]">
                         <td>{{i.ped_cab_codigo}}</td>
                         <td>{{cambiarformatoFecha(i.ped_cab_fecha)}}</td>
                         <td>{{i.ped_cab_subtotal}}</td>
@@ -41,6 +36,17 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="container__orders__pagination">
+                <p>Mostrando {{page + 1}} - {{page + (pedidos | filterPedidos: codigoPedido: page)[0].length}} de
+                    {{(pedidos | filterPedidos: codigoPedido: page)[1]}} totales</p>
+                <div class="container__orders__pagination__buttons">
+                    <button (click)="previousPage()" [disabled]="(page) === 0">Anterior</button>
+                    <button (click)="nextPage()"
+                        [disabled]="(page + (pedidos | filterPedidos: codigoPedido: page)[0].length) === ((pedidos | filterPedidos: codigoPedido: page)[1])">Siguiente</button>
+
+                </div>
+            </div>
+
         </div>
     </div>
     <input type="checkbox" id="closeModal" name="closeModal">
@@ -49,7 +55,7 @@
             <div class="modal__content__menu">
                 <h2>Detalles del Pedido</h2>
                 <div>
-                    <label for="closeModal"><i class="fas fa-times-circle"></i></label>
+                    <label for="closeModal" (click)="eliminar()"><i class="fas fa-times-circle"></i></label>
                 </div>
             </div>
             <div class="modal__content__print">

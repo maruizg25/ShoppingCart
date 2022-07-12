@@ -1,5 +1,6 @@
 main {
     background: #FFDAB9;
+    height: 100%;
 }
 
 .container {
@@ -18,7 +19,7 @@ main {
     margin-bottom: 1.5em;
 }
 
-.container__search form label {
+.container__search label {
     display: block;
     font-size: 1em;
     font-weight: bold;
@@ -38,7 +39,7 @@ main {
     padding: 1em;
 }
 
-.container__search form input {
+.container__search input {
     box-sizing: border-box;
     border: 1.5px solid #aaa;
     border-radius: 3px;
@@ -57,11 +58,11 @@ main {
     margin-right: 1em;
 }
 
-.container__search form input:focus {
+.container__search input:focus {
     border: 1.5px solid #000;
 }
 
-.container__search form button {
+.container__search button {
     color: #fff;
     border-radius: 3px;
     background-color: #28A745;
@@ -76,7 +77,7 @@ main {
     font-weight: 400;
 }
 
-.container__search form button:hover {
+.container__search button:hover {
     background: #000;
     cursor: pointer;
     transition: .2s;
@@ -117,6 +118,41 @@ tr:hover td {
     font-size: 20px;
     margin-right: 10px;
     cursor: pointer;
+}
+.container__orders__pagination {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container__orders__pagination p {
+    padding: 1em 0;
+}
+/* 
+.container__orders__pagination__buttons {
+    background: #000;
+} */
+
+.container__orders__pagination__buttons button {
+    margin: 0.5em 0;
+    margin-left: 0.5em;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #28A745;
+    border: 0;
+    padding: 10px 50px;
+    font-weight: bold;
+    /* float: right; */
+
+    transition: opacity .2s ease-out;
+
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.container__orders__pagination__buttons button:hover {
+    background: #000;
+    cursor: pointer;
+    transition: .2s;
 }
 
 /* 
