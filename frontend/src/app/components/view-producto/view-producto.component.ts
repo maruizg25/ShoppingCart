@@ -63,7 +63,7 @@ export class ViewProductoComponent implements OnInit {
     if (id ==6) {
       category ="Tecnologia"
     }
-    if (id ==6) {
+    if (id ==8) {
       category ="Limpieza"
     }
     return category

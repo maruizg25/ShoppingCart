@@ -97,8 +97,7 @@
                   <i class="fas fa-trash-alt"></i>
                 </a>
                 <a class="btn btn-success" data-toggle="modal" data-target="#editarCliente" 
-                (click)="infoCliente(cliente.per_id,cliente.per_cedula,cliente.per_nombres,cliente.per_telefono,
-                cliente.per_correo,cliente.per_direccion,cliente.per_estadocivil,cliente.per_ciudad)">
+                (click)="EditarCliente(cliente)">
                   <i class="fas fa-edit"></i>
                 </a>
                 <div class="modal fade" id="editarCliente" tabindex="-1" role="dialog"
@@ -115,37 +114,33 @@
                         <form [formGroup]="clientefromGroup">
                           <div class="form-group">
                             <label name ="Codigo Cliente">
-                              <h4> Persona ID : {{informacionCliente.per_id}}</h4>                                
+                              <input type="text" name="Id" formControlName="per_id" class="form-control">                                
                             </label>                            
                             
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Cedula" formControlName="per_cedula" class="form-control"  value="{{informacionCliente.per_cedula}}">
-                            
-                          </div>
-                          <div class="form-group">
-                            <input type="text" name="Nombre" formControlName="per_nombres" class="form-control"  value="{{informacionCliente.per_nombres}}">
+                            <input type="text" name="Nombre" formControlName="per_nombres" class="form-control">
                               
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Telefono" formControlName="per_telefono" class="form-control"  value="{{informacionCliente.per_telefono}}">
+                            <input type="text"   name="Telefono" formControlName="per_telefono" class="form-control">
                               
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Correo" formControlName="per_correo" class="form-control"  value="{{informacionCliente.per_correo}}">
+                            <input type="text"   name="Correo" formControlName="per_correo" class="form-control">
                               
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Estado Civil" formControlName="per_estadocivil" class="form-control"  value="{{informacionCliente.per_estadocivil}}">
+                            <input type="text"   name="Estado Civil" formControlName="per_estadocivil" class="form-control">
                              
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Ciudad" formControlName="per_ciudad" class="form-control"  value="{{informacionCliente.per_ciudad}}">
+                            <input type="text"    name="Ciudad" formControlName="per_ciudad" class="form-control">
                              
                           </div>                              
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"  >Actualizar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="actualizarCliente()" >Actualizar</button>
                           </div>
                         </form>
                       </div>
