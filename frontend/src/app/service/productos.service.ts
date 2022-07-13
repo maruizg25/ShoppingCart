@@ -28,7 +28,7 @@ export class ProductoService {
   }
 
   public getProductById(pro_id: any) {
-    const url = "https://app-backend-sh-cart.herokuapp.com/productos/" + pro_id;
+    const url = "https://app-backend-sh-cart.herokuapp.com/productos/id/" + pro_id;
     return this.http.get(url);
   }
 
@@ -37,18 +37,18 @@ export class ProductoService {
     return this.http.get(url);
   }
 
-  public deleteProduct(pro_id:any){
-    const url= `https://app-backend-sh-cart.herokuapp.com/productos`+pro_id
-    return this.http.delete(url)
+  public deleteProduct(pro_id:any,body:any){
+    const url= `https://app-backend-sh-cart.herokuapp.com/productos/delete/`+pro_id
+    return this.http.put(url,body)
   }
   
   public postCreateProduct(body:any){
     const url= `https://app-backend-sh-cart.herokuapp.com/productos`
-    return this.http.post(url,body)
+    return this.http.post(url,body,this.httpOptions)
   }
   
-  public putUpdateProduct(body:any){
-    const url= `https://app-backend-sh-cart.herokuapp.com/productos`
+  public putUpdateProduct(id: any,body:any){
+    const url= `https://app-backend-sh-cart.herokuapp.com/productos/id/`+id
     return this.http.put(url,body)
   }
 

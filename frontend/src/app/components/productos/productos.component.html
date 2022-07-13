@@ -91,7 +91,7 @@
                     <div class="form-group  form-group input-group mb-3">
                       <span class="input-group-text">Categorias</span>
                       <select name="form-select" formControlName="categoriaSelected">
-                        <option *ngFor="let c of categorias" [value]="c.cat_id">{{c.cat_descripcion}}
+                        <option *ngFor="let c of pro_categorias" value="{{c}}">{{c}}
                         </option>
                       </select>
                     </div>
@@ -170,11 +170,11 @@
                 {{p.pro_precio}}
               </td>
               <td class="d-flex justify-content-center">
-                <a class="btn btn-danger" (click)="deleteProduct(p.pro_id)">
+                <a class="btn btn-danger" (click)="deleteProducto(p.pro_id)">
                   <i class="fas fa-trash-alt"></i>
                 </a>
                 <a class="btn btn-success" data-toggle="modal" data-target="#editarProducto"
-                  (click)="infoUpdateProducto(p.pro_id,p.codigo_prod,p.cat_id,p.pro_nombre,p.pro_descripcion,p.pro_cantidad,p.pro_precio,p.pro_imagen)">
+                  (click)="infoUpdateProducto(p)">
                   <i class="fas fa-edit"></i>
                 </a>
                 <div class="modal fade" id="editarProducto" tabindex="-1" role="dialog"
@@ -190,45 +190,34 @@
                       <div class="modal-body">
                         <form [formGroup]="form">
                           <div class="form-group">
-                            <label>
-                              <label>
-                                <h6>Id Producto:{{informacionProducto.pro_id}}</h6>
-                              </label>
-                            </label>
-                            <input type="text" name="Codigo producto" formControlName="txtpro_codigo"
-                              placeholder="{{informacionProducto.pro_codigo}}" class="form-control">
+                            <input type="text" name="Codigo producto" formControlName="txtpro_codigo" class="form-control">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Nombre Producto" formControlName="txtpro_nombres"
-                              placeholder="{{informacionProducto.pro_nombres}}" class="form-control">
+                            <input type="text" name="Nombre Producto" formControlName="txtpro_nombres" class="form-control">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Descripcion Producto" formControlName="txtpro_descripcion"
-                              placeholder="{{informacionProducto.pro_descripcion}}" class="form-control">
+                            <input type="text" name="Descripcion Producto" formControlName="txtpro_descripcion"class="form-control">
                           </div>
                           <div class="form-group  form-group input-group mb-3">
                             <span class="input-group-text">Categorias</span>
                             <select name="form-select" formControlName="categoriaSelected">
-                              <option *ngFor="let c of categorias" [value]="c.cat_id">{{c.cat_descripcion}
+                              <option *ngFor="let c of pro_categorias" value="{{c}}">{{c}}
                                 </option>
                             </select>
                         </div>  
                           <div class="form-group">
-                            <input id="cantidad" type="number" formControlName="txtcantidad"
-                              placeholder="{{informacionProducto.pro_cantidad}}" #cantidad min="1">
+                            <input id="cantidad" type="number" formControlName="txtcantidad"#cantidad min="1">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Imagen" formControlName="txtpro_imagen"
-                              placeholder="{{informacionProducto.pro_imagen}}" class="form-control">
+                            <input type="text" name="Imagen" formControlName="txtpro_imagen"class="form-control">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Precio" formControlName="txtpro_precio"
-                              placeholder="{{informacionProducto.pro_precio}}" class="form-control">
+                            <input type="text" name="Precio" formControlName="txtpro_precio"class="form-control">
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal"
-                              (click)="actualizarProducto(informacionProducto.pro_id)">Actualizar</button>
+                              (click)="actualizarProducto()">Actualizar</button>
                           </div>
                         </form>
                       </div>

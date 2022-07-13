@@ -39,36 +39,32 @@ export class ClientOrderListComponent implements OnInit {
     ped_det_cant: -1,
     ped_det_unitario: -1,
     ped_det_total: -1
-  }
-  ];
+  }];
   cliente: string = '1004600183';
+  codigoPedido: string = '';
+  page: number = 0;
+  totalPedidos: number = 0;
 
-  public form!: FormGroup;
-
-  public informacionPedido = {
-    ped_cab_id: -1,
-    per_id: -1,
-    ped_cab_codigo: "",
-    ped_cab_fecha: "",
-    ped_cab_subtotal: "",
-    ped_cab_iva: "",
-    ped_cab_total: ""
-  }
-
-  constructor(private pedidoService: PedidosService,
-    private formBuilder: FormBuilder) { }
+  constructor(private pedidoService: PedidosService) { }
 
   ngOnInit(): void {
     this.leerPedidosByCedula();
-    this.form = this.formBuilder.group({
-      txtCodigoPedido: ['']
-    })
+  }
+
+  public nextPage(){
+    this.page += 5;
+  }
+
+  public previousPage(){
+    if (this.page > 0)
+      this.page -=5;
   }
 
   public leerPedidosByCedula() {
     this.pedidoService.getOrderHeadersByCedula(this.cliente).subscribe(
       (pedido: any) => {
         this.pedidos = pedido
+        this.totalPedidos = this.pedidos.length
         console.log(this.pedidos)
       },
       (error) => console.warn(error)
@@ -85,19 +81,6 @@ export class ClientOrderListComponent implements OnInit {
     return numeroRedondeado;
   }
 
-  public leerPedidoByCodigo() {
-    this.pedidoService.getOrderByCode(this.form.value.txtCodigoPedido).subscribe(
-      (pedido: any) => {
-        this.pedidos = pedido
-        if (this.pedidos.length == 0) {
-          this.leerPedidosByCedula();
-        }
-        console.log(this.pedidos)
-      },
-      (error) => console.warn(error)
-    )
-  }
-
   public leerDetalleByCodigoPedido(ped_cab_codigo: any) {
     this.pedidoService.getDetailByHeaderCode(ped_cab_codigo).subscribe(
       (detalle: any) => {
@@ -108,7 +91,30 @@ export class ClientOrderListComponent implements OnInit {
     )
   }
 
-  header = [['Id', 'Código', 'Nombre Producto', 'Precio', 'Cantidad', 'Total']]
+  public eliminar() {
+    this.detallesPedido = [{
+      per_cedula: "",
+      per_nombres: "",
+      per_telefono: "",
+      per_correo: "",
+      pro_nombre: "",
+      pro_descripcion: "",
+      codigo_prod: "",
+      ped_cab_id: -1,
+      per_id: -1,
+      ped_cab_codigo: "",
+      ped_cab_fecha: "",
+      ped_cab_subtotal: -1,
+      ped_cab_iva: -1,
+      ped_cab_total: -1,
+      ped_det_id: -1,
+      ped_det_cant: -1,
+      ped_det_unitario: -1,
+      ped_det_total: -1
+    }];
+  }
+
+  header: any = [['Id', 'Código', 'Nombre Producto', 'Precio', 'Cantidad', 'Total']]
 
   tableData: any = []
 
@@ -215,7 +221,7 @@ export class ClientOrderListComponent implements OnInit {
     let fecha = formatDate(new Date(), 'dd-MM-yyyy', 'en-US')
     doc.text("Este documento cuenta con una validez de 30 días hábiles.", 105, 280, { align: 'center' });
     doc.text("Fecha Generación Documento: " + fecha, 105, 285, { align: 'center' });
-    
+
     doc.output('dataurlnewwindow');
   }
 
