@@ -62,11 +62,9 @@
       <div class="col-md-12">
         <br>
       </div>
-      <div class="container-fluid">
-        <form class="d-flex" role="search">
-          <input class="form-control me-3" width="50" type="search" placeholder="Busqueda" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Busqueda</button>
-        </form>
+      <div class="container-fluid form-group">
+        <input type="text" class="form-control" name="filterClientes" placeholder="Buscar..."
+        [(ngModel)]=" filterClientes">
       </div>
       <div class="col-md-12">
         <br>
@@ -85,7 +83,7 @@
             </tr>
           </thead>
           <tbody >
-            <tr *ngFor="let cliente of clientes" >
+            <tr *ngFor="let cliente of (clientes | filterClientes:filterClientes)[0]" >
               <td>{{cliente.per_cedula}}</td>
               <td>{{cliente.per_nombres}}</td>
               <td>{{cliente.per_telefono}}</td>
@@ -155,6 +153,16 @@
             </tr>
           </tbody>
         </table>
+        <div class="container__orders__pagination">
+          <p>Mostrando {{page + 1}} - {{page + (clientes | filterClientes: filterClientes: page)[0].length}} de
+              {{(clientes | filterClientes: filterClientes: page)[1]}} totales</p>
+          <div class="container__orders__pagination__buttons">
+              <button (click)="previousPage()" [disabled]="(page) === 0">Anterior</button>
+              <button (click)="nextPage()"
+                  [disabled]="(page + (clientes | filterClientes: filterClientes: page)[0].length) === ((clientes | filterClientes: filterClientes: page)[1])">Siguiente</button>
+
+          </div>
+      </div>
       </div>
     </div>
   </div>

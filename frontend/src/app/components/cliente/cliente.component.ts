@@ -35,11 +35,24 @@ export class ClienteComponent implements OnInit {
     });
   }
 
+  
+
 
   ngOnInit(): void {
     this.getAllClientes();
   }
 
+  filterClientes = '';
+  page = 0;
+  totalClientes: number = 0;
+  public nextPage(){
+    this.page += 5;
+  }
+
+  public previousPage(){
+    if (this.page > 0)
+      this.page -=5;
+  }
 
   public getAllClientes() {
     this._clienteService.getAllClientes().subscribe(

@@ -73,6 +73,43 @@ section{
     }
 }
 
+.container__orders__pagination {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container__orders__pagination p {
+    padding: 1em 0;
+}
+/* 
+.container__orders__pagination__buttons {
+    background: #000;
+} */
+
+.container__orders__pagination__buttons button {
+    margin: 0.5em 0;
+    margin-left: 0.5em;
+    color: #000;
+    border-radius: 3px;
+    background-color: #FFEEBA;
+    border: 0;
+    padding: 10px 50px;
+    font-weight: bold;
+    /* float: right; */
+
+    transition: opacity .2s ease-out;
+
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.container__orders__pagination__buttons button:hover {
+    background: #000;
+    color: #FFF;
+    cursor: pointer;
+    transition: .2s;
+}
+
 @media (max-width: 858px){
     .checkbtn{
         display: block;

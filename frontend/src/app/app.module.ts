@@ -20,6 +20,7 @@ import { FilterPipe } from './shared/filter.pipe';
 import { EditarClienteComponent } from './components/editar-cliente/editar-cliente.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPedidosPipe } from './shared/filter-pedidos.pipe';
+import { FilterClientesPipe } from './shared/filter-clientes.pipe';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { FilterPedidosPipe } from './shared/filter-pedidos.pipe';
     FilterPipe,
     EditarClienteComponent,
     FilterPedidosPipe,
+    FilterClientesPipe,
   ],
   imports: [
     AppRoutingModule,
