@@ -21,7 +21,7 @@ import { EditarClienteComponent } from './components/editar-cliente/editar-clien
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPedidosPipe } from './shared/filter-pedidos.pipe';
 import { FilterClientesPipe } from './shared/filter-clientes.pipe';
-
+import { FilterProductosPipe } from './shared/filter-productos.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { FilterClientesPipe } from './shared/filter-clientes.pipe';
     EditarClienteComponent,
     FilterPedidosPipe,
     FilterClientesPipe,
+    FilterProductosPipe
   ],
   imports: [
     AppRoutingModule,
