@@ -65,13 +65,13 @@ export class ClienteComponent implements OnInit {
   public eliminarCliente(per_id: any, cliente: any) {
 
     Swal.fire({
-      title: 'Esta seguro de eliminar al cliente?',
-      text: "El cliente ya no podra acceder el sistema!",
+      title: 'Está seguro de eliminar de dar de baja al cliente?',
+      text: "El cliente ya no podrá acceder el sistema!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, borrar usuario!',
+      confirmButtonText: 'Si',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -80,8 +80,8 @@ export class ClienteComponent implements OnInit {
             this.getAllClientes();
           });
         Swal.fire(
-          'Eliminado!',
-          'Usuario borrado.',
+          'Desahibilitado!',
+          'El cliente ha sido dado de baja del sistema.',
           'success'
         )
       }
@@ -117,16 +117,18 @@ export class ClienteComponent implements OnInit {
     this._clienteService.updateCliente(this.id_cliente, this.informacionCliente).subscribe(
       res => {
         this.getAllClientes();
-        console.log('Actualizado');
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Cliente actualizado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      
       });
 
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Cliente actualizado correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
+    
 
 
   }

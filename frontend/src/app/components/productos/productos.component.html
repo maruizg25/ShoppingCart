@@ -100,7 +100,7 @@
                         #cantidad min="1" class="form-control">
                     </div>
                     <div class="form-group">
-                      <input type="text" name="Imagen" formControlName="txtpro_imagen" placeholder="Insertar URL imagen"
+                      <input type="file" name="Imagen" (change)="cargarImagen($event)" placeholder="Insertar URL imagen"
                         class="form-control">
                     </div>
                     <div class="form-group">
@@ -208,7 +208,7 @@
                             <input id="cantidad" type="number" formControlName="txtcantidad"#cantidad min="1">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="Imagen" formControlName="txtpro_imagen"class="form-control">
+                            <input type="file" name="Imagen" (change)="cargarImagen($event)" class="form-control">
                           </div>
                           <div class="form-group">
                             <input type="text" name="Precio" formControlName="txtpro_precio"class="form-control">

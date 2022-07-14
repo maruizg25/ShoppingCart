@@ -5,6 +5,8 @@ import { ModelCategoria } from 'src/app/model/model.categoria';
 import { ProductoService } from 'src/app/service/productos.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageService } from 'src/app/service/storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productos',
@@ -25,6 +27,7 @@ export class ProductosComponent implements OnInit {
   nombreProducto: string = '';
   page: number = 0;
   id_producto: any
+  imagen_producto: any
 
   public informacionProducto = {
     pro_id: -1,
@@ -40,7 +43,7 @@ export class ProductosComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private productoService: ProductoService) {
+    private productoService: ProductoService , private storageService: StorageService) {
     
   }
 
@@ -54,7 +57,6 @@ export class ProductosComponent implements OnInit {
       txtpro_cantidad: [''],
       txtpro_descripcion: [''],
       txtpro_precio: [''],
-      txtpro_imagen: [''],
       categoriaSelected: []
     })
     this.leerProductos();
@@ -129,6 +131,21 @@ export class ProductosComponent implements OnInit {
     )
   }
 
+  public cargarImagen(event:any){
+    let archivo = event.target.files
+    let reader = new FileReader();
+    let nombre = "img"
+    let fecha = Date.now()
+    reader.readAsDataURL(archivo[0])
+    reader.onloadend =()=>{
+      this.storageService.subirImagen(nombre+""+fecha, reader.result).then(urlImagen=>{
+        console.log(urlImagen)
+        this.imagen_producto = urlImagen
+      })
+    }
+
+  }
+
   public leerPedidosByName() {
     this.productoService.getProductByName(this.pro).subscribe(
       (producto: any) => {
@@ -150,11 +167,17 @@ export class ProductosComponent implements OnInit {
       pro_descripcion: this.form.value.txtpro_descripcion,
       pro_cantidad: this.form.value.txtcantidad,
       pro_precio: this.form.value.txtpro_precio,
-      pro_imagen: this.form.value.txtpro_imagen,
+      pro_imagen: this.imagen_producto,
       pro_estado: true
     }).subscribe(
       respuesta => {
-        console.log('Producto creado correctamente');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Producto creado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.form.reset();
         this.leerProductos();
       }
@@ -168,7 +191,6 @@ export class ProductosComponent implements OnInit {
     this.form.controls["txtpro_descripcion"].setValue(producto.pro_descripcion)
     this.form.controls["categoriaSelected"].setValue(this.showCategoyById(producto.cat_id))
     this.form.controls["txtcantidad"].setValue(producto.pro_cantidad)
-    this.form.controls["txtpro_imagen"].setValue(producto.pro_imagen)
     this.form.controls["txtpro_precio"].setValue(producto.pro_precio)
 
     console.log(this.id_producto)
@@ -188,11 +210,17 @@ export class ProductosComponent implements OnInit {
         pro_cantidad: this.form.value.txtcantidad,
         pro_estado: true,
         pro_precio: this.form.value.txtpro_precio,
-        pro_imagen: this.form.value.txtpro_imagen,
+        pro_imagen: this.imagen_producto,
   
       }).subscribe(
       respuesta => {
-        console.log('Producto actualizado correctamente');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Producto actualizado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.form.reset()
         this.leerProductos()
 
@@ -202,25 +230,45 @@ export class ProductosComponent implements OnInit {
 
   public deleteProducto(pro_id: any) {
 
-    this.productoService.deleteProduct(pro_id ,
-      {
-        pro_id: pro_id,
-        pro_codigo: this.form.value.txtpro_codigo,
-        cat_id: this.form.value.categoriaSelected,
-        pro_nombres: this.form.value.txtpro_nombre,
-        pro_descripcion: this.form.value.txtpro_descripcion,
-        pro_cantidad: this.form.value.cantidadSelected,
-        pro_precio: this.form.value.txtpro_precio,
-        pro_imagen: this.form.value.txtpro_imagen,
-  
-      }).subscribe(
-      respuesta => {
-        console.log('Producto eliminado correctamente');
-        this.form.reset()
-        this.leerProductos()
+    Swal.fire({
+      title: 'Está seguro de eliminar al siguiente producto?',
+      text: "El producto ya no se verá en el listado!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productoService.deleteProduct(pro_id ,
+          {
+            pro_id: pro_id,
+            pro_codigo: this.form.value.txtpro_codigo,
+            cat_id: this.form.value.categoriaSelected,
+            pro_nombres: this.form.value.txtpro_nombre,
+            pro_descripcion: this.form.value.txtpro_descripcion,
+            pro_cantidad: this.form.value.cantidadSelected,
+            pro_precio: this.form.value.txtpro_precio,
+            pro_imagen: this.imagen_producto,
+      
+          }).subscribe(
+          respuesta => {
+            this.form.reset()
+            this.leerProductos()
+    
+          }
+        )
 
+        Swal.fire(
+          'Eliminado!',
+          'Producto borrado.',
+          'success'
+        )
       }
-    )
+    })
+
+
   }
 
 }

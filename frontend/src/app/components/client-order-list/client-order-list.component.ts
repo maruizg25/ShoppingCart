@@ -76,6 +76,8 @@ export class ClientOrderListComponent implements OnInit {
     return fecha.replace("T00:00:00.000Z", "")
   }
 
+  
+
   public redonderNumero(numero: any) {
     var numeroRedondeado = numero.toFixed(2);
     return numeroRedondeado;
