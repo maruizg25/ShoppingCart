@@ -3,6 +3,7 @@ import { ModelCliente } from 'src/app/model/model.cliente';
 import { ClientesService } from 'src/app/service/clientes.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cliente',
@@ -15,7 +16,7 @@ export class ClienteComponent implements OnInit {
   id_cliente: any
 
 
- informacionCliente = {
+  informacionCliente = {
     per_nombres: '',
     per_telefono: '',
     per_correo: '',
@@ -35,7 +36,7 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  
+
 
 
   ngOnInit(): void {
@@ -45,13 +46,13 @@ export class ClienteComponent implements OnInit {
   filterClientes = '';
   page = 0;
   totalClientes: number = 0;
-  public nextPage(){
+  public nextPage() {
     this.page += 5;
   }
 
-  public previousPage(){
+  public previousPage() {
     if (this.page > 0)
-      this.page -=5;
+      this.page -= 5;
   }
 
   public getAllClientes() {
@@ -62,11 +63,32 @@ export class ClienteComponent implements OnInit {
       });
   }
   public eliminarCliente(per_id: any, cliente: any) {
-    this._clienteService.deleteCliente(per_id, cliente).subscribe(
-      res => {
-        this.getAllClientes();
-      });
-   
+
+    Swal.fire({
+      title: 'Esta seguro de eliminar al cliente?',
+      text: "El cliente ya no podra acceder el sistema!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar usuario!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._clienteService.deleteCliente(per_id, cliente).subscribe(
+          res => {
+            this.getAllClientes();
+          });
+        Swal.fire(
+          'Eliminado!',
+          'Usuario borrado.',
+          'success'
+        )
+      }
+    })
+
+
+
   }
 
 
@@ -84,8 +106,8 @@ export class ClienteComponent implements OnInit {
   }
 
 
-actualizarCliente() {
-  console.log(this.id_cliente)
+  actualizarCliente() {
+    console.log(this.id_cliente)
     this.informacionCliente.per_nombres = this.clientefromGroup.value.per_nombres;
     this.informacionCliente.per_telefono = this.clientefromGroup.value.per_telefono;
     this.informacionCliente.per_correo = this.clientefromGroup.value.per_correo;
@@ -97,7 +119,15 @@ actualizarCliente() {
         this.getAllClientes();
         console.log('Actualizado');
       });
-    
+
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Cliente actualizado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
 
   }
 
