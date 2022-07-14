@@ -123,9 +123,8 @@
         <br>
       </div>
       <div class="container-fluid">
-        <form [formGroup]="form" class="d-flex" role="search">
-          <input class="form-control me-3" width="50" type="search" formControlName="txtpro_id" placeholder="Busqueda por nombre" aria-label="Search">
-          <button class="btn btn-outline-success"  type="submit">Busqueda</button>
+        <form class="d-flex" role="search">
+          <input class="form-control me-3" width="50" type="text" placeholder="Ingrese Nombre Producto" name="nombrePorducto" [(ngModel)]="nombreProducto">
         </form>
       </div>
       <div class="col-md-12">
@@ -147,7 +146,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let p of productos">
+            <tr *ngFor="let p of (productos | filterProductos: nombreProducto: page)[0]">
               <td>
                 {{p.pro_id}}
               </td>
@@ -228,6 +227,16 @@
             </tr>
           </tbody>
         </table>
+        <div class="container__orders__pagination">
+          <p>Mostrando {{page + 1}} - {{page + (productos | filterProductos: nombreProducto: page)[0].length}} de
+              {{(productos | filterProductos: nombreProducto: page)[1]}} totales</p>
+          <div class="container__orders__pagination__buttons">
+              <button (click)="previousPage()" [disabled]="(page) === 0">Anterior</button>
+              <button (click)="nextPage()"
+                  [disabled]="(page + (productos | filterProductos:nombreProducto: page)[0].length) === ((productos | filterProductos: nombreProducto: page)[1])">Siguiente</button>
+
+          </div>
+      </div>
       </div>
     </div>
   </div>

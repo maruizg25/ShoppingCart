@@ -27,10 +27,7 @@ export class ProductoService {
     return this.http.get(url);
   }
 
-  public getProductById(pro_id: any) {
-    const url = "https://app-backend-sh-cart.herokuapp.com/productos/id/" + pro_id;
-    return this.http.get(url);
-  }
+  
 
   public getProductByName(pro_name: any) {
     const url = "https://app-backend-sh-cart.herokuapp.com/productos/" + pro_name;

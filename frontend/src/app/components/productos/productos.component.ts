@@ -22,6 +22,8 @@ export class ProductosComponent implements OnInit {
 
   public form!: FormGroup;
   pro: string = 'Anillo';
+  nombreProducto: string = '';
+  page: number = 0;
   id_producto: any
 
   public informacionProducto = {
@@ -56,9 +58,17 @@ export class ProductosComponent implements OnInit {
       categoriaSelected: []
     })
     this.leerProductos();
-    this.leerProductoByCodigo();
+    
   }
 
+  public nextPage(){
+    this.page += 5;
+  }
+
+  public previousPage(){
+    if (this.page > 0)
+      this.page -=5;
+  }
 
   showcategory(category: string):number{
     let id = 0
@@ -130,18 +140,7 @@ export class ProductosComponent implements OnInit {
   }
 
 
-  public leerProductoByCodigo() {
-    this.productoService.getProductById(this.form.value.txtpro_id).subscribe(
-      (producto: any) => {
-        this.productos = producto
-        if (this.productos.length == 0) {
-          this.leerPedidosByName();
-        }
-        console.log(this.productos)
-      },
-      (error) => console.warn(error)
-    )
-  }
+  
 
   public postProduct() {
     this.productoService.postCreateProduct({
