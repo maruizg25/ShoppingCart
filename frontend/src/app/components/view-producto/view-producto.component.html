@@ -10,7 +10,7 @@
         <div class="item">
             <a (click)="filter('Electrodomesticos')">
                 <img src="" alt="">
-                <h6>Electrodomesticos</h6>
+                <h6>Electrodomésticos</h6>
             </a>
         </div>
         <div class="item">
@@ -41,7 +41,7 @@
         <div class="item">
             <a (click)="filter('Tecnologia')">
                 <img style="width: 62px; margin-top: 5px;" src="" alt="">
-                <h6>Tecnologia</h6>
+                <h6>Tecnología</h6>
             </a>
         </div>
 
@@ -51,6 +51,7 @@
                 <h6>Mis Compras</h6>
             </a>
         </div>
+
     </div>
 </div>
 
@@ -59,10 +60,8 @@
         <ng-container *ngFor="let item of filterCategory | filter:searchKey:'pro_nombre'" >
             <div class="card col-mb-3">
                 <img src="{{item.pro_imagen}}" alt="">
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.pro_nombre}}</h5>
-                <p><strong>Price:</strong> ${{item.pro_precio}}</p>
-                 <input id="cantidad" type="number" placeholder="Cantidad" #cantidad min="1">
-                 <br>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch; font-size: 20px; font-family:Arial; ">{{item.pro_nombre}}</h5>
+                <p style="font-size: 15px;"><strong>Precio:</strong> ${{item.pro_precio}}</p>
                 <button class="btn btn-success" (click)="addToCart(item)" >Añadir al carrito
                     <i style="font-size: 20px;" class="fas fa-cart-plus">&nbsp;</i>
                 </button>

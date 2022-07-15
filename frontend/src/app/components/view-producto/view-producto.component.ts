@@ -1,6 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
 import { ProductoService } from 'src/app/service/productos.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-producto',
@@ -12,10 +14,10 @@ export class ViewProductoComponent implements OnInit {
   public productList : any ;
   public filterCategory : any;
   searchKey:string ="";
-  @ViewChild('cantidad')
-  cantidad!: ElementRef;
+
+
   constructor(private productListService : ProductoService ,
-    private cartService : CartService) { }
+    private cartService : CartService , private router : Router) { }
 
   ngOnInit(): void {
     this.productListService.getProduct().subscribe((res:any)=>{
@@ -33,8 +35,17 @@ export class ViewProductoComponent implements OnInit {
   }
 
   addToCart(item: any){
-    this.cartService.addtoCart(item);
-    const data = document.getElementById("cantidad") 
+    if(item){
+      Swal.fire({
+        icon: 'success',
+        title: 'Producto seleccionado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.cartService.addtoCart(item);
+      this.router.navigate(['/cart']);
+    }
+   
   }
 
   filter(category:string){

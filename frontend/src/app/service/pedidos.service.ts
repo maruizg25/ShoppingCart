@@ -7,6 +7,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class PedidosService {
 
   constructor(private http: HttpClient) { }
+  
+  httpOptions = {
+    headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+    })
+    }
 
   public getOrderHeaders() {
     const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/cabeceras";
@@ -37,6 +43,17 @@ export class PedidosService {
     const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/masterdetalle/codigo/" + det_cab_codigo;
     return this.http.get(url);
   }
+
+  public postOrderHeader(cabecera: any){
+    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/cabeceras"
+    return this.http.post(url, JSON.stringify(cabecera) ,this.httpOptions);
+  }
+
+  public postOrderDetail(detail: any){
+    const url = "https://app-backend-sh-cart.herokuapp.com/pedidos/detalles"
+    return this.http.post(url, JSON.stringify(detail) ,this.httpOptions);
+  }
+  
 
   // LOCALH0ST
 

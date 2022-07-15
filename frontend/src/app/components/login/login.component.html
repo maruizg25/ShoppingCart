@@ -18,13 +18,12 @@
 <body>
   <div class="container-form sign-in"> 
     <form class="formulario">
-      <h2 class="create-account"> Iniciar Sesion</h2>  
+      <h2 class="create-account"> Iniciar Sesión</h2>  
         <br>
         <br>
         <input type="text" [(ngModel)]="UsuarioDatos.usr_usuario"  placeholder="Usuario" name="usr_usuario">
         <input type="password" [(ngModel)]="UsuarioDatos.usr_clave" placeholder="Contraseña" name="usr_clave">
         <input type="button" value="Iniciar Sesión" (click)="LogIn()">
-        <input type="button" value="Regresar al menu" routerLink="/main">
     </form>
     <div class="welcome-back">
       <div class="message">
@@ -33,6 +32,7 @@
           <p>Si aún no la tienes, registrate aquí.</p>
           <p>100% gratis</p>          
           <button routerLink="/register" class="sign-in-btn">Registrarse</button>
+          <button routerLink="/main" class="sign-in-btn">Regresar al menú</button>
       </div>
     </div>    
   </div>  

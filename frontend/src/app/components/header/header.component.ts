@@ -9,12 +9,14 @@ import { CartService } from 'src/app/service/cart.service';
 export class HeaderComponent implements OnInit {
   public totalItem: number = 0;
   public searchTerm: string ='';
+  public cedula: string = '';
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.cartService.getProducts().subscribe(res=>{
       this.totalItem = res.length;
     })
+    this.cedula=String(localStorage.getItem('per_cedula'));
   }
 
   search(event:any){

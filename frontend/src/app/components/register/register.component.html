@@ -22,27 +22,29 @@
             <div class="message">
                 <h2>Bienvenido a tu tienda virtual</h2>
                 <p>¿Tienes una cuenta?</p>
-                <p>Si ya la tienes, inicia sesion</p>
-                <button routerLink="/login" class="sign-up-btn">Iniciar Sesion</button>
-                <button routerLink="/main" class="sign-up-btn">Regresar al menu</button>
+                <p>Si ya la tienes, inicia sesión</p>
+                <button routerLink="/login" class="sign-up-btn">Iniciar Sesión</button>
+                <button routerLink="/main" class="sign-up-btn">Regresar al menú</button>
             </div>
         </div>
         <form action="" class="formulario">
-            <input  type="text" placeholder="Cédula">
-            <input  type="text" placeholder="Nombres">
-            <input  type="text" placeholder="Dirección">
-            <input  type="text" placeholder="Teléfono">
-            <input  type="email" placeholder="Correo">
-            <input  type="password" placeholder="Contraseña">
-            <select class="select">
-                <option value="Ciudad">Ciudades</option>
+            <input  type="text" placeholder="Cédula" [(ngModel)]="clienteData.per_cedula" name="per_cedula">
+            <input  type="text" placeholder="Nombres" [(ngModel)]="clienteData.per_nombres" name="per_nombres">
+            <input  type="text" placeholder="Dirección" [(ngModel)]="clienteData.per_direccion" name="per_direccion">
+            <input  type="text" placeholder="Teléfono"  [(ngModel)]="clienteData.per_telefono" name="per_telefono">
+            <input  type="email" placeholder="Correo"  [(ngModel)]="clienteData.per_correo" name="per_correo">
+            <input  type="password" placeholder="Contraseña" [(ngModel)]="clienteData.per_clave" name="per_clave">
+            <select class="select"  [(ngModel)]="clienteData.per_ciudad" name="per_ciudad">
+                <option>Ciudad</option>
+                <option *ngFor="let ciudad of ciudades" value="{{ciudad.name}}" >{{ciudad.name}} </option>
             </select>
             <br>
             <br>
-            <select class="select">
-                <option value="Estado Civil">Estado Civil</option>
+            <select class="select" [(ngModel)]="clienteData.per_estadocivil" name="per_estadocivil" >
+                <option>Estado Civil</option>
+                <option *ngFor="let states of estado_civiles"    value="{{states.name}}" >{{states.name}}</option>
             </select>
-            <input type="button" value="Registrase">
+            <input type="button" (click)="SignUp()" value="Registrase">
         </form>
     </div>
     <!-- <div class="container">

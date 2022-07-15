@@ -40,7 +40,7 @@ export class ClientOrderListComponent implements OnInit {
     ped_det_unitario: -1,
     ped_det_total: -1
   }];
-  cliente: string = '1004600183';
+  cliente: string = String(localStorage.getItem('per_cedula'));
   codigoPedido: string = '';
   page: number = 0;
   totalPedidos: number = 0;

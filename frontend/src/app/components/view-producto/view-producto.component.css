@@ -1,3 +1,4 @@
+
 .card-top {
     position: relative;
     display: flex;
@@ -17,11 +18,16 @@
 .item {
     cursor: grab;
     margin: 0px 15px;
-    text-align: center;
+}
+
+.item h6 {
+  font-size: large;
+  font-family:Arial;
 }
 
 .item a:hover {
     color: greenyellow;
+    
 }
 
 .card {

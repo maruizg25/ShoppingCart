@@ -12,4 +12,12 @@ export class NavloginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Salir de sesion del cliente
+   */
+  SignOut(): void { 
+    localStorage.removeItem('per_cedula');
+  }
+
 }
+
