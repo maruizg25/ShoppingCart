@@ -27,7 +27,8 @@ export class ProductosComponent implements OnInit {
   nombreProducto: string = '';
   page: number = 0;
   id_producto: any
-  imagen_producto: any
+  imagen_producto: string ="";
+  imagen_update:  string ="";
 
   public informacionProducto = {
     pro_id: -1,
@@ -57,7 +58,8 @@ export class ProductosComponent implements OnInit {
       txtpro_cantidad: [''],
       txtpro_descripcion: [''],
       txtpro_precio: [''],
-      categoriaSelected: []
+      categoriaSelected: [],
+      txtpro_imagen: ['']
     })
     this.leerProductos();
     
@@ -82,7 +84,7 @@ export class ProductosComponent implements OnInit {
       id=3
     }
     if (category==="Accesorios") {
-      id =4
+      id=4
     }
     if (category==="Aseo Personal") {
       id=5
@@ -140,7 +142,7 @@ export class ProductosComponent implements OnInit {
     reader.onloadend =()=>{
       this.storageService.subirImagen(nombre+""+fecha, reader.result).then(urlImagen=>{
         console.log(urlImagen)
-        this.imagen_producto = urlImagen
+        this.imagen_producto = String(urlImagen)
       })
     }
 
@@ -192,14 +194,22 @@ export class ProductosComponent implements OnInit {
     this.form.controls["categoriaSelected"].setValue(this.showCategoyById(producto.cat_id))
     this.form.controls["txtcantidad"].setValue(producto.pro_cantidad)
     this.form.controls["txtpro_precio"].setValue(producto.pro_precio)
-
+    this.form.controls["txtpro_imagen"].disable();
+    this.form.controls["txtpro_imagen"].setValue(producto.pro_imagen)
+    this.imagen_update = producto.pro_imagen
     console.log(this.id_producto)
 
   }
 
 
   public actualizarProducto() {
-
+    // si no actualiza la imagen
+    let fecha = new Date();
+    console.log(fecha.getSeconds());
+    console.log(this.imagen_producto)
+    if (this.imagen_producto == "") {
+      this.imagen_producto = this.imagen_update
+    }
     this.productoService.putUpdateProduct(this.id_producto ,
       {
         pro_id: this.id_producto,

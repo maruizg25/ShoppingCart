@@ -101,6 +101,8 @@ body {
     
 }
 
+
+
 .border-icon {
     height: 20px;
     width: 20px;
@@ -154,9 +156,9 @@ body {
     cursor: pointer;
     color:#222;
 }
-.select{
-    background-color: transparent;
-    color: aliceblue;
+.formulario select{
+    background-color: rgba(51, 4, 49, 0.602);
+    color: rgb(221, 219, 219);
 }
 
 
