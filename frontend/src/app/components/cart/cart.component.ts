@@ -252,11 +252,13 @@ export class CartComponent implements OnInit {
               this.pedidoService.postOrderDetail(this.pedidoDetalle).subscribe((data: {}) => {
                this.cartService.removeAllCart();
                this.selectProduct =[]
+               this.subtotal = 0
+               this.total = 0
 
               })
               Swal.fire(
                 'Pedido creado correctamente!',
-                'Revise la seccion mis compras.',
+                'Revise la sección mis compras.',
                 'success'
               )
 
