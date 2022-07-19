@@ -89,8 +89,8 @@
             </div>
 
             <div>
+                <label for="ciudad" class="form-label">Ciudad: </label>
                 <select class="select" [(ngModel)]="clienteData.per_ciudad" name="per_ciudad">
-                    <option selected>Ciudad</option>
                     <option *ngFor="let ciudad of ciudades" value="{{ciudad.name}}">{{ciudad.name}} </option>
                 </select>
                 <span id="valueCity">
@@ -100,8 +100,8 @@
             </div>
 
             <div>
+                <label for="estado civil" class="form-label">Estado civil:</label>
                 <select class="select" [(ngModel)]="clienteData.per_estadocivil" name="per_estadocivil">
-                    <option>Estado Civil</option>
                     <option *ngFor="let states of estado_civiles" value="{{states.name}}">{{states.name}}</option>
                 </select>
                 <span id="valueStatus">
