@@ -78,7 +78,7 @@
                 </span>
             </div> -->
 
-            <div>
+            <div class="password">
                 <input class="arrowpopup" type="password" placeholder="Contraseña" [(ngModel)]="clienteData.per_clave"
                     name="per_clave">
                 <span id="valuePassword">
@@ -91,7 +91,7 @@
 
             <div>
                 <select class="select" [(ngModel)]="clienteData.per_ciudad" name="per_ciudad">
-                    <option>Ciudad</option>
+                    <option selected>Ciudad</option>
                     <option *ngFor="let ciudad of ciudades" value="{{ciudad.name}}">{{ciudad.name}} </option>
                 </select>
                 <span id="valueCity">
