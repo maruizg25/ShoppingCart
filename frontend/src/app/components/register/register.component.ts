@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
   }
 
   validatePasswords(password: string) {
-    var expr: RegExp = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/g;
+    var expr: RegExp = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/g;
     var verification = expr.test(password);
     return verification;
   }
