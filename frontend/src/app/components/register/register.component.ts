@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.clienteData)
     // utilizar try catch
     try {
-
+      let warningDNI = document.getElementById('valueId')!;
       let warningNames = document.getElementById('valueNames')!;
       let warningAddress = document.getElementById('valueAddress')!;
       let warningPhone = document.getElementById('valuePhone')!;
@@ -96,6 +96,13 @@ export class RegisterComponent implements OnInit {
       let warningStatus = document.getElementById('valueStatus')!;
 
       let comprobación = true;
+
+      if (this.clienteData.per_cedula == ''){
+        warningDNI.style.display = 'block';
+        comprobación = false;
+      } else {
+        warningDNI.style.display = 'none';
+      }
 
       if (this.clienteData.per_nombres == '') {
         warningNames.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese sus nombres.";

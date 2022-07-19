@@ -28,31 +28,47 @@
             </div>
         </div>
         <form action="" class="formulario">
-            <input type="text" placeholder="Cédula" [(ngModel)]="clienteData.per_cedula" name="per_cedula">
-            <input type="text" placeholder="Nombres" [(ngModel)]="clienteData.per_nombres" name="per_nombres">
-            <div id="valueNames">
-                <i class="fas fa-info-circle"></i>
-                Campo Obligatorio.
-                Ingrese un nombre correcto.
+            <div>
+                <input type="text" placeholder="Cédula" [(ngModel)]="clienteData.per_cedula" name="per_cedula">
+                <span id="valueId">
+                    <i class="fas fa-info-circle"></i>
+                    Cédula Incorrecta.
+                </span>
             </div>
-            <input type="text" placeholder="Dirección" [(ngModel)]="clienteData.per_direccion" name="per_direccion">
-            <div id="valueAddress">
-                <i class="fas fa-info-circle"></i>
-                Ingrese una dirección.
+
+            <div>
+                <input type="text" placeholder="Nombres" [(ngModel)]="clienteData.per_nombres" name="per_nombres">
+                <span id="valueNames">
+                    <i class="fas fa-info-circle"></i>
+                    Campo Obligatorio.
+                    Ingrese un nombre correcto.
+                </span>
             </div>
-            <input type="text" placeholder="Teléfono" [(ngModel)]="clienteData.per_telefono" name="per_telefono">
-            <div id="valuePhone">
-                <i class="fas fa-info-circle"></i>
-                Ingrese un número de teléfono.
+
+            <div>
+                <input type="text" placeholder="Dirección" [(ngModel)]="clienteData.per_direccion" name="per_direccion">
+                <span id="valueAddress">
+                    <i class="fas fa-info-circle"></i>
+                    Ingrese una dirección.
+                </span>
             </div>
-            <input type="email" placeholder="Correo" [(ngModel)]="clienteData.per_correo" name="per_correo">
-            <div id="valueMail">
-                <i class="fas fa-info-circle"></i>
-                Ingrese un correo correcto.
-                Campo Obligatorio.
+
+            <div>
+                <input type="text" placeholder="Teléfono" [(ngModel)]="clienteData.per_telefono" name="per_telefono">
+                <span id="valuePhone">
+                    <i class="fas fa-info-circle"></i>
+                    Ingrese un número de teléfono.
+                </span>
             </div>
-            <input class="arrowpopup" type="password" placeholder="Contraseña" [(ngModel)]="clienteData.per_clave"
-                name="per_clave">
+
+            <div>
+                <input type="email" placeholder="Correo" [(ngModel)]="clienteData.per_correo" name="per_correo">
+                <span id="valueMail">
+                    <i class="fas fa-info-circle"></i>
+                    Ingrese un correo correcto.
+                    Campo Obligatorio.
+                </span>
+            </div>
 
             <!-- <div class="tooltip">
                 <span class="tooltiptext">
@@ -62,27 +78,37 @@
                 </span>
             </div> -->
 
-            <div id="valuePassword">
-                <i class="fas fa-info-circle"></i>
-                Su contraseña debe tener al entre 8 - 16 caracteres, al menos un dígito, al menos una minúscula y al
-                menos una mayúscula.
-                No puede tener otros símbolos.
+            <div>
+                <input class="arrowpopup" type="password" placeholder="Contraseña" [(ngModel)]="clienteData.per_clave"
+                    name="per_clave">
+                <span id="valuePassword">
+                    <i class="fas fa-info-circle"></i>
+                    Su contraseña debe tener al entre 8 - 16 caracteres, al menos un dígito, al menos una minúscula y al
+                    menos una mayúscula.
+                    No puede tener otros símbolos.
+                </span>
             </div>
-            <select class="select" [(ngModel)]="clienteData.per_ciudad" name="per_ciudad">
-                <option>Ciudad</option>
-                <option *ngFor="let ciudad of ciudades" value="{{ciudad.name}}">{{ciudad.name}} </option>
-            </select>
-            <div id="valueCity">
-                <i class="fas fa-info-circle"></i>
-                Seleccione su ciudad.
+
+            <div>
+                <select class="select" [(ngModel)]="clienteData.per_ciudad" name="per_ciudad">
+                    <option>Ciudad</option>
+                    <option *ngFor="let ciudad of ciudades" value="{{ciudad.name}}">{{ciudad.name}} </option>
+                </select>
+                <span id="valueCity">
+                    <i class="fas fa-info-circle"></i>
+                    Seleccione su ciudad.
+                </span>
             </div>
-            <select class="select" [(ngModel)]="clienteData.per_estadocivil" name="per_estadocivil">
-                <option>Estado Civil</option>
-                <option *ngFor="let states of estado_civiles" value="{{states.name}}">{{states.name}}</option>
-            </select>
-            <div id="valueStatus">
-                <i class="fas fa-info-circle"></i>
-                Seleccione su estado civil.
+
+            <div>
+                <select class="select" [(ngModel)]="clienteData.per_estadocivil" name="per_estadocivil">
+                    <option>Estado Civil</option>
+                    <option *ngFor="let states of estado_civiles" value="{{states.name}}">{{states.name}}</option>
+                </select>
+                <span id="valueStatus">
+                    <i class="fas fa-info-circle"></i>
+                    Seleccione su estado civil.
+                </span>
             </div>
             <input type="button" (click)="SignUp()" value="Registrarse">
         </form>
