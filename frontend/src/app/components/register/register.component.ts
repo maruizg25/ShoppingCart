@@ -65,9 +65,20 @@ export class RegisterComponent implements OnInit {
   }
 
   validateNames(namesPer: string) {
-
     var expr: RegExp = /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/g;
     var verification = expr.test(namesPer);
+    return verification;
+  }
+
+  validatePasswords(password: string) {
+    var expr: RegExp = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/g;
+    var verification = expr.test(password);
+    return verification;
+  }
+
+  validateMail(mail: string) {
+    var expr: RegExp = /^([da-z_.-]+)@([da-z.-]+).([a-z.]{2,6})$/;
+    var verification = expr.test(mail);
     return verification;
   }
 
@@ -81,14 +92,23 @@ export class RegisterComponent implements OnInit {
       let warningPhone = document.getElementById('valuePhone')!;
       let warningMail = document.getElementById('valueMail')!;
       let warningPassword = document.getElementById('valuePassword')!;
+      let warningCity = document.getElementById('valueCity')!;
+      let warningStatus = document.getElementById('valueStatus')!;
 
       let comprobación = true;
 
-      if (this.validateNames(this.clienteData.per_nombres)) {
-        warningNames.style.display = 'none';
-      } else {
+      if (this.clienteData.per_nombres == '') {
+        warningNames.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese sus nombres.";
         warningNames.style.display = 'block';
         comprobación = false;
+      } else {
+        if (this.validateNames(this.clienteData.per_nombres)) {
+          warningNames.style.display = 'none';
+        } else {
+          warningNames.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese un nombre correcto.";
+          warningNames.style.display = 'block';
+          comprobación = false;
+        }
       }
 
       if (this.clienteData.per_direccion == '') {
@@ -97,24 +117,47 @@ export class RegisterComponent implements OnInit {
       } else {
         warningAddress.style.display = 'none';
       }
+
       if (this.clienteData.per_telefono == '') {
         warningPhone.style.display = 'block';
         comprobación = false;
       } else {
         warningPhone.style.display = 'none';
       }
+
       if (this.clienteData.per_correo == '') {
+        warningMail.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese un correo electrónico.";
         warningMail.style.display = 'block';
         comprobación = false;
       } else {
-        warningMail.style.display = 'none';
+        if (this.validateMail(this.clienteData.per_correo)) {
+          warningMail.style.display = 'none';
+        } else {
+          warningMail.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese un correo válido.";
+          warningMail.style.display = 'block';
+          comprobación = false;
+        }
       }
 
-      if (this.clienteData.per_clave.length < 8) {
+      if (this.validatePasswords(this.clienteData.per_clave)) {
+        warningPassword.style.display = 'none';
+      } else {
         warningPassword.style.display = 'block';
         comprobación = false;
+      }
+
+      if (this.clienteData.per_ciudad == 'Ciudad' || this.clienteData.per_ciudad == '') {
+        warningCity.style.display = 'block';
+        comprobación = false;
       } else {
-        warningPassword.style.display = 'none';
+        warningCity.style.display = 'none';
+      }
+
+      if (this.clienteData.per_estadocivil == '' || this.clienteData.per_estadocivil == 'Estado Civil') {
+        warningStatus.style.display = 'block';
+        comprobación = false;
+      } else {
+        warningStatus.style.display = 'none';
       }
 
 
