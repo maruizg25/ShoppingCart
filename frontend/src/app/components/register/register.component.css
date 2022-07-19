@@ -92,7 +92,7 @@ body {
 
 .formulario div {
     position: relative;
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
 }
 
 .formulario div span {
@@ -113,7 +113,7 @@ body {
 }
 
 .formulario .password{
-    margin-bottom: 3.5em;
+    margin-bottom: 4em;
 }
 
 .create-account {
