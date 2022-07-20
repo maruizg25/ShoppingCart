@@ -97,7 +97,7 @@ export class RegisterComponent implements OnInit {
 
       let comprobación = true;
 
-      if (this.clienteData.per_cedula == ''){
+      if (this.clienteData.per_cedula == '') {
         warningDNI.style.display = 'block';
         comprobación = false;
       } else {
@@ -187,10 +187,10 @@ export class RegisterComponent implements OnInit {
         })
       }
 
-
+      return comprobación;
     } catch (error) {
       console.log(error);
-
+      return false;
       Swal.fire({
         position: 'center',
         icon: 'warning',

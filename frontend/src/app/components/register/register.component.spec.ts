@@ -20,4 +20,11 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Registro Correcto', () =>{
+    const app = fixture.componentInstance;
+
+    const mail = "bapulamarinc@utn.edu.ec";
+    expect(app.validateMail(mail)).toBeTrue();
+  });
 });

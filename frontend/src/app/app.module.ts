@@ -52,7 +52,7 @@ import { FilterProductosPipe } from './shared/filter-productos.pipe';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
