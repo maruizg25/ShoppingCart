@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
     per_ciudad: ''
   }
 
+  opcion: string= "ciudad";
   // myForm: FormGroup;
 
   constructor(private clienteService: ClientesService) {
@@ -163,13 +164,13 @@ export class RegisterComponent implements OnInit {
         comprobación = false;
       } else {
         if (this.validateDNI(this.clienteData.per_cedula)) {
-          if (this.validateRegisteredDNI(this.clienteData.per_cedula)) {
-            warningDNI.innerHTML = "<i class='fas fa-info-circle'></i> Cédula ya registrada.";
-            warningDNI.style.display = 'block';
-            comprobación = false;
-          } else {
+          // if (this.validateRegisteredDNI(this.clienteData.per_cedula)) {
+          //   warningDNI.innerHTML = "<i class='fas fa-info-circle'></i> Cédula ya registrada.";
+          //   warningDNI.style.display = 'block';
+          //   comprobación = false;
+          // } else {
             warningDNI.style.display = 'none';
-          }
+          // }
         } else {
           warningDNI.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese una cédula correcta.";
           warningDNI.style.display = 'block';

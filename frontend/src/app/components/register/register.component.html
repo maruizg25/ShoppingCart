@@ -28,8 +28,9 @@
             </div>
         </div>
         <form action="" class="formulario">
+            <h2>* Campos Obligatorios</h2>
             <div>
-                <input type="text" placeholder="Cédula" [(ngModel)]="clienteData.per_cedula" name="per_cedula">
+                <input type="text" placeholder="Cédula *" [(ngModel)]="clienteData.per_cedula" name="per_cedula">
                 <span id="valueId">
                     <i class="fas fa-info-circle"></i>
                     Cédula Incorrecta.
@@ -37,7 +38,7 @@
             </div>
 
             <div>
-                <input type="text" placeholder="Nombres" [(ngModel)]="clienteData.per_nombres" name="per_nombres">
+                <input type="text" placeholder="Nombres *" [(ngModel)]="clienteData.per_nombres" name="per_nombres">
                 <span id="valueNames">
                     <i class="fas fa-info-circle"></i>
                     Campo Obligatorio.
@@ -46,7 +47,8 @@
             </div>
 
             <div>
-                <input type="text" placeholder="Dirección" [(ngModel)]="clienteData.per_direccion" name="per_direccion">
+                <input type="text" placeholder="Dirección *" [(ngModel)]="clienteData.per_direccion"
+                    name="per_direccion">
                 <span id="valueAddress">
                     <i class="fas fa-info-circle"></i>
                     Ingrese una dirección.
@@ -54,7 +56,7 @@
             </div>
 
             <div>
-                <input type="text" placeholder="Teléfono" [(ngModel)]="clienteData.per_telefono" name="per_telefono">
+                <input type="text" placeholder="Teléfono *" [(ngModel)]="clienteData.per_telefono" name="per_telefono">
                 <span id="valuePhone">
                     <i class="fas fa-info-circle"></i>
                     Ingrese un número de teléfono.
@@ -62,7 +64,7 @@
             </div>
 
             <div>
-                <input type="email" placeholder="Correo" [(ngModel)]="clienteData.per_correo" name="per_correo">
+                <input type="email" placeholder="Correo *" [(ngModel)]="clienteData.per_correo" name="per_correo">
                 <span id="valueMail">
                     <i class="fas fa-info-circle"></i>
                     Ingrese un correo correcto.
@@ -70,26 +72,8 @@
                 </span>
             </div>
 
-            <!-- <div class="tooltip">
-                <span class="tooltiptext">
-                    <i class="fas fa-info-circle"></i>
-                    Ingrese Contraseña.
-                    Contraseña debe contener mas de 8 caracteres.
-                </span>
-            </div> -->
-
-            <div class="password">
-                <input class="arrowpopup" type="password" placeholder="Contraseña" [(ngModel)]="clienteData.per_clave"
-                    name="per_clave">
-                <span id="valuePassword">
-                    <i class="fas fa-info-circle"></i>
-                    Su contraseña debe tener más de 8 caracteres, al menos un dígito, al menos una minúscula y al
-                    menos una mayúscula. No puede tener otros símbolos.
-                </span>
-            </div>
-
             <div>
-                <label for="ciudad" class="form-label">Ciudad: </label>
+                <label for="ciudad" class="form-label">Ciudad *</label>
                 <select class="select" [(ngModel)]="clienteData.per_ciudad" name="per_ciudad">
                     <option *ngFor="let ciudad of ciudades" value="{{ciudad.name}}">{{ciudad.name}} </option>
                 </select>
@@ -100,7 +84,7 @@
             </div>
 
             <div>
-                <label for="estado civil" class="form-label">Estado civil:</label>
+                <label for="estado civil" class="form-label">Estado civil *</label>
                 <select class="select" [(ngModel)]="clienteData.per_estadocivil" name="per_estadocivil">
                     <option *ngFor="let states of estado_civiles" value="{{states.name}}">{{states.name}}</option>
                 </select>
@@ -109,6 +93,18 @@
                     Seleccione su estado civil.
                 </span>
             </div>
+
+            <div class="password">
+                <input class="arrowpopup" type="password" placeholder="Contraseña *" [(ngModel)]="clienteData.per_clave"
+                    name="per_clave">
+                <span id="valuePassword">
+                    <i class="fas fa-info-circle"></i>
+                    Su contraseña debe tener más de 8 caracteres, al menos un dígito, al menos una minúscula y al
+                    menos una mayúscula. No puede tener otros símbolos ni espacios.
+                </span>
+            </div>
+
+
             <input type="button" (click)="SignUp()" value="Registrarse">
         </form>
         <!-- <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate>
