@@ -119,7 +119,7 @@ body {
 .formulario h2 {
     font-size: 10px;
     background: rgba(51, 4, 49, 0.602);
-    margin-bottom: 0;
+    margin-bottom: 1em;
 }
 
 .formulario .password {
