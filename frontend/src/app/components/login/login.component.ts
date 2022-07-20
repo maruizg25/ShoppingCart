@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       (error) => console.warn(error)
     )
   }
+  
   LogIn(){
     let login = false
     let rol = 0

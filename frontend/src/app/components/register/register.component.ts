@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModelCiudad } from 'src/app/model/model.ciudad';
+import { ModelCliente } from 'src/app/model/model.cliente';
 import { ModelEstadoCivil } from 'src/app/model/model.state';
 import { ClientesService } from 'src/app/service/clientes.service';
 import Swal from 'sweetalert2';
@@ -82,6 +83,66 @@ export class RegisterComponent implements OnInit {
     return verification;
   }
 
+  validateDNI(cedula: string) {
+    if (cedula.length == 10) {
+      let tercerDigito = parseInt(cedula.substring(2, 3));
+      if (tercerDigito < 6) {
+        // El ultimo digito se lo considera dígito verificador
+        let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        let verificador = parseInt(cedula.substring(9, 10));
+        let suma: number = 0;
+        let digito: number = 0;
+        for (let i = 0; i < (cedula.length - 1); i++) {
+          digito = parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+          suma += ((parseInt((digito % 10) + '') + (parseInt((digito / 10) + ''))));
+          //      console.log(suma+" suma"+coefValCedula[i]); 
+        }
+        suma = Math.round(suma);
+        //  console.log(verificador);
+        //  console.log(suma);
+        //  console.log(digito);
+        if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10) == verificador)) {
+          return true;
+        } else if ((10 - (Math.round(suma % 10))) == verificador) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  validateRegisteredDNI(cedula: string) {
+    let clienteV = {
+      per_rol: 2,
+      per_cedula: '',
+      per_nombres: '',
+      per_direccion: '',
+      per_telefono: '',
+      per_correo: '',
+      per_clave: '',
+      per_estado: true,
+      per_estadocivil: '',
+      per_ciudad: ''
+    };
+    this.clienteService.getClientsByCedula(cedula).subscribe(
+      (cliente: any) => {
+        clienteV = cliente
+        console.log(cliente);
+      },
+      (error) => console.warn(error)
+    )
+    if(clienteV.per_cedula != ''){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   SignUp() {
     console.log(this.clienteData)
     // utilizar try catch
@@ -101,7 +162,19 @@ export class RegisterComponent implements OnInit {
         warningDNI.style.display = 'block';
         comprobación = false;
       } else {
-        warningDNI.style.display = 'none';
+        if (this.validateDNI(this.clienteData.per_cedula)) {
+          if (this.validateRegisteredDNI(this.clienteData.per_cedula)) {
+            warningDNI.innerHTML = "<i class='fas fa-info-circle'></i> Cédula ya registrada.";
+            warningDNI.style.display = 'block';
+            comprobación = false;
+          } else {
+            warningDNI.style.display = 'none';
+          }
+        } else {
+          warningDNI.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese una cédula correcta.";
+          warningDNI.style.display = 'block';
+          comprobación = false;
+        }
       }
 
       if (this.clienteData.per_nombres == '') {
