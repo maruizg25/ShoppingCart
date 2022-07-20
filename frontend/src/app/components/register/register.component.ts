@@ -125,10 +125,19 @@ export class RegisterComponent implements OnInit {
       },
       (error) => console.warn(error)
     )
-    if(clienteV.per_cedula != ''){
+    if (clienteV.per_cedula != '') {
       return false;
-    }else{
+    } else {
       return true;
+    }
+  }
+
+  viewPassword() {
+    var tipo: HTMLInputElement = <HTMLInputElement>document.getElementById('password')!;
+    if (tipo.type == "password") {
+      tipo.type = "text";
+    } else {
+      tipo.type = "password";
     }
   }
 
@@ -157,7 +166,7 @@ export class RegisterComponent implements OnInit {
           //   warningDNI.style.display = 'block';
           //   comprobación = false;
           // } else {
-            warningDNI.style.display = 'none';
+          warningDNI.style.display = 'none';
           // }
         } else {
           warningDNI.innerHTML = "<i class='fas fa-info-circle'></i> Ingrese una cédula correcta.";
