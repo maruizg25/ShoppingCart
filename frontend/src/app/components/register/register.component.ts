@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModelCiudad } from 'src/app/model/model.ciudad';
-import { ModelCliente } from 'src/app/model/model.cliente';
 import { ModelEstadoCivil } from 'src/app/model/model.state';
 import { ClientesService } from 'src/app/service/clientes.service';
 import Swal from 'sweetalert2';
@@ -24,18 +23,7 @@ export class RegisterComponent implements OnInit {
     per_ciudad: ''
   }
 
-  opcion: string= "ciudad";
-  // myForm: FormGroup;
-
   constructor(private clienteService: ClientesService) {
-    // this.myForm = this.fb.group({
-    //   name: ['', [Validators.required]],
-    //   company: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
-    //   email: ['', [Validators.required], Validators.email],
-    //   age: ['', [Validators.required]],
-    //   url: ['', [Validators.required]],
-    //   password: ['', [Validators.required]],
-    // });
   }
 
   ciudades: ModelCiudad[] = [];
