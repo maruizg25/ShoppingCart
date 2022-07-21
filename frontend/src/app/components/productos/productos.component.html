@@ -72,32 +72,46 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form [formGroup]="form">
+                  <form [formGroup]="form" (ngSubmit)="submit()">
                     <div class="form-group">
                       <label>
 
                       </label>
                       <input type="text" name="Codigo producto" formControlName="txtpro_codigo"
                         placeholder="Insertar codigo producto" class="form-control">
-                      <span id="valueCode">
+                    </div>
+                    <div>
+                      <span *ngIf="this.form.get('txtpro_codigo')?.errors?.['required']">
                         <i class="fas fa-info-circle"></i>
                         Ingrese un codigo de producto válido.
                       </span>
                     </div>
                     <div class="form-group">
                       <input type="text" name="Nombre Producto" formControlName="txtpro_nombres"
-                        placeholder="Insertar nombre producto" class="form-control" required="true">
-                      <span id="valueNames">
-                        <i class="fas fa-info-circle"></i>
-                        Ingrese un nombre de producto válido.
-                      </span>
+                        placeholder="Insertar nombre producto" class="form-control" >
                     </div>
+                    <div>
+                      <span *ngIf="this.form.get('txtpro_nombres')?.errors?.['required']">
+                        <i class="fas fa-info-circle"></i>
+                        (El nombre no puede quedar vacio)
+                      </span>
+                      <span *ngIf="this.form.get('txtpro_nombres')?.errors?.['minlength']">
+                        <i class="fas fa-info-circle"></i>
+                        (Debe tener como mínimo 3 caracteres)
+                      </span>
+                    </div>   
                     <div class="form-group">
                       <input type="text" name="Descripcion Producto" formControlName="txtpro_descripcion"
                         placeholder="Insertar descripcion producto" class="form-control" required>
-                      <span id="valueDescription">
+                    </div>
+                    <div>
+                      <span *ngIf="this.form.get('txtpro_descripcion')?.errors?.['required']">
                         <i class="fas fa-info-circle"></i>
                         Ingrese una descripcion de producto válido.
+                      </span>
+                      <span *ngIf="this.form.get('txtpro_descripcion')?.errors?.['minlength']">
+                        <i class="fas fa-info-circle"></i>
+                        (Debe tener como mínimo 5 caracteres)
                       </span>
                     </div>
                     <div class="form-group  form-group input-group mb-3">
@@ -106,7 +120,9 @@
                         <option *ngFor="let c of pro_categorias" value="{{c}}">{{c}}
                         </option>
                       </select>
-                      <span id="valueCategory">
+                    </div>
+                    <div>
+                      <span *ngIf="this.form.get('categoriaSelected')?.errors?.['required']">
                         <i class="fas fa-info-circle"></i>
                         Ingrese una categoria válida.
                       </span>
@@ -114,7 +130,9 @@
                     <div class="form-group">
                       <input id="cantidad" type="number" formControlName="txtcantidad" placeholder="Insertar cantidad"
                         #cantidad min="1" class="form-control">
-                      <span id="valueAmount">
+                    </div>
+                    <div>
+                      <span *ngIf="this.form.get('txtcantidad')?.errors?.['required']">
                         <i class="fas fa-info-circle"></i>
                         Ingrese una cantidad válida.
                       </span>
@@ -122,21 +140,21 @@
                     <div class="form-group">
                       <input type="file" name="Imagen" (change)="cargarImagen($event)" placeholder="Insertar URL imagen"
                         class="form-control">
-                      <span id="valueImage">
-                        <i class="fas fa-info-circle"></i>
-                        Ingrese una imagen de producto válida.
-                      </span>
                     </div>
                     <div class="form-group">
                       <input type="text" name="Precio" formControlName="txtpro_precio" placeholder="Insertar Precio"
                         class="form-control">
-                      <span id="valueCost">
+                    </div>
+                    <div>
+                      <span *ngIf="this.form.get('txtpro_precio')?.errors?.['required']">
                         <i class="fas fa-info-circle"></i>
-                        Ingrese un codigo de producto válido.
+                        Ingrese un precio de producto válido.
                       </span>
                     </div>
-
-                    <input type="button" (click)="productPost()" value="Registrase">
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="submit"  class="btn btn-primary" (click)="postProduct()" data-dismiss="modal">Crear</button>
+                    </div>
                   </form>
                 </div>
               </div>

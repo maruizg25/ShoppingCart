@@ -19,6 +19,7 @@ export class ProductosComponent implements OnInit {
   categorias: ModelCategoria[] = [];
   public idCategoria!: number;
   public descripcionCategoria!: String
+  resultado!: string;
   public pro_categorias: String[] = ["Ropa", "Electrodomesticos",
     "Accesorios", "Aseo Personal", "Tecnologia", "Limpieza"];
 
@@ -52,17 +53,24 @@ export class ProductosComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       txtpro_id: ['',[Validators.required]],
-      txtpro_nombres: ['',[Validators.required]],
+      txtpro_nombres: ['',[Validators.required, Validators.minLength(3),Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]],
       txtcantidad: ['',[Validators.required]],
       txtpro_codigo: ['',[Validators.required]],
-      txtpro_cantidad: ['',[Validators.required]],
-      txtpro_descripcion: ['',[Validators.required]],
-      txtpro_precio: ['',[Validators.required]],
+      txtpro_cantidad: ['',[Validators.required,Validators.pattern('/^[1-9]\d{6,10}$/')]],
+      txtpro_descripcion: ['',[Validators.required, Validators.minLength(5)]],
+      txtpro_precio: ['',[Validators.required,Validators.pattern('/^[1-9]\d{6,10}$/')]],
       categoriaSelected: [,[Validators.required]],
       txtpro_imagen: ['',[Validators.required]]
     })
     this.leerProductos();
+    this.submit();
+  }
 
+  submit() {
+    if (this.form.valid)
+      this.resultado = "Todos los datos son válidos";
+    else
+      this.resultado = "Hay datos inválidos en el formulario";
   }
 
   public nextPage() {
@@ -316,6 +324,7 @@ export class ProductosComponent implements OnInit {
         })
         this.form.reset();
         this.leerProductos();
+        this.submit();
       }
     )
   }
